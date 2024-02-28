@@ -1,6 +1,6 @@
 # Project Title
 
-One Paragraph of project description goes here
+This project is meant to a place where developers of all skill levels can more easily find others to work with. Community is such an important part of developing passion in any field, and the tech industry much like many others can be relatively inaccessible to many groups of people. When I thought about my own fears in reaching out and working with others, I realized that others could be feeling the same way too. I thought, "what if there were a way to more easily find people like me to work on a project with?" and then thought "Huh, maybe I can build it." So, let's build it!
 
 ## Getting Started
 
@@ -58,9 +58,8 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [React](https://react.dev/) - The web framework used
+* [Gradle](https://gradle.org/) - Dependency Management
 
 ## Contributing
 
