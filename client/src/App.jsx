@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <Button />
+      <Button size="small"/>
     </>
   )
 }
