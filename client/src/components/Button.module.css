@@ -1,6 +1,7 @@
 .btn {
-    background-color: black;
+    background-color: var(--neutral-color-1100);
     color: white;
+    border-radius: 2rem;
 }
 
 .small {
