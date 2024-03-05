@@ -5,8 +5,11 @@ Styling in React feels... unnatural! I need an easy to understand, inspect, and 
 
 ## Considered Options
 - Styled Components
-- Tailwind UI
+- Tailwind CSS
 - Material UI
 - CSS Modules
 
 ### Decision Outcome
+Tailwind CSS. 
+Styled Components means inline styles, and CSS Modules seems to have an issue regarding the order build and application in Vite (and Webpack). The lack of consistency in style application makes CSS Modules unreliable.
+Material UI could be useful, but this project is meant to help understand me design and styling, and pre-styled components may not be as instructive.
