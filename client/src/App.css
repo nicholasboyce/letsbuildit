@@ -16,6 +16,23 @@
   --fs-800: 2rem;
   --fs-900: 3rem;
   --fs-1000: 3.375rem;
+
+  --gap-100: 0.25rem;
+  --gap-200: 0.5rem;
+  --gap-300: 0.75rem;
+  --gap-400: 1rem;
+  --gap-500: 1.5rem;
+  --gap-600: 2rem;
+  --gap-700: 3rem;
+  --gap-800: 4rem;
+  --gap-900: 6rem;
+  --gap-1000: 8rem;
+  --gap-1100: 12rem;
+  --gap-1200: 16rem;
+  --gap-1300: 24rem;
+  --gap-1400: 32rem;
+  --gap-1500: 40rem;
+  --gap-1600: 48rem;
 }
 
 * {
