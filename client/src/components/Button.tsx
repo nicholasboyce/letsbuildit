@@ -1,7 +1,11 @@
-import PropTypes from 'prop-types';
 import styles from './Button.module.css';
 
-const Button = ({size, signedIn}) => {
+interface ButtonProps extends HTMLButtonElement {
+    size: string;
+    signedIn: boolean;
+}
+
+const Button = ({size, signedIn, ...props} : ButtonProps) => {
     let text = '';
     if (signedIn) {
         text = 'Log Out';
@@ -17,9 +21,5 @@ const Button = ({size, signedIn}) => {
     )
 }
 
-Button.propTypes = {
-    size: PropTypes.string,
-    signedIn: PropTypes.bool
-}
 
 export default Button;
