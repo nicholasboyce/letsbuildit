@@ -1,8 +1,8 @@
 import styles from './Button.module.css';
 
 interface ButtonProps extends HTMLButtonElement {
-    size: string;
-    signedIn: boolean;
+    size?: string;
+    signedIn?: boolean;
 }
 
 const Button = ({size, signedIn, ...props} : ButtonProps) => {
@@ -17,7 +17,7 @@ const Button = ({size, signedIn, ...props} : ButtonProps) => {
         }
     }
     return (
-        <button className={`${styles.btn} ${ styles[size]}`}>{text}</button>
+        <button className={`${styles.btn} ${styles[size]}`}>{text}</button>
     )
 }
 

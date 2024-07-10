@@ -1,0 +1,33 @@
+.homepage-wrapper {
+    background-image: linear-gradient(var(--neutral-color-100), 80%, var(--primary-color-400));
+    font-family: var(--ff-heading);
+}
+
+.homepage {
+    display: grid;
+    min-height: 100svh;
+    grid-template-rows: auto 1fr;
+    width: min(78.5rem, 90vw);
+    margin: 0 auto;
+}
+
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    row-gap: var(--gap-400);
+}
+
+.hero-image {
+    margin-block: 2rem;
+}
+
+.hero-heading {
+    font-size: var(--fs-800);
+    font-weight: bold;
+}
+
+.hero-text {
+    /* font-size: var(--fs-800); */
+}
