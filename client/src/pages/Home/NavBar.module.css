@@ -1,0 +1,17 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--ff-heading);
+    font-weight: bold;
+    text-decoration: none;
+    font-size: var(--fs-600);
+}
+
+.logo:visited,
+.logo:link {
+    color: var(--neutral-color-1100);
+}

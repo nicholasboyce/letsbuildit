@@ -1,4 +1,5 @@
 import styles from './Button.module.css';
+import GithubLogo from './GithubLogo';
 
 interface ButtonProps extends HTMLButtonElement {
     size?: string;
@@ -17,7 +18,10 @@ const Button = ({size, signedIn, ...props} : ButtonProps) => {
         }
     }
     return (
-        <button className={`${styles.btn} ${styles[size]}`}>{text}</button>
+        <button className={`${styles.btn} ${styles[size]}`}>
+            <GithubLogo />
+            {text}
+        </button>
     )
 }
 
