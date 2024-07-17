@@ -7,7 +7,7 @@ const NavBar = () => {
     return (
         <nav className={styles.navbar}>
             <Link to="/" className={styles.logo}>Let's Build It!</Link>
-            <Button size='small' />
+            <Button authType='login' />
         </nav>
     )
 };

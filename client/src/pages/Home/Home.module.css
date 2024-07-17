@@ -5,6 +5,7 @@
 
 .homepage {
     display: grid;
+    min-height: 100vh;
     min-height: 100svh;
     grid-template-rows: auto 1fr;
     width: min(78.5rem, 90vw);
@@ -12,7 +13,7 @@
 }
 
 .page-header {
-    margin-block-start: var(--gap-400);
+    margin-block-start: var(--gap-500);
 }
 
 .hero-section {
@@ -25,6 +26,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    gap: var(--gap-500);;
     row-gap: var(--gap-500);
     margin-block: auto;
 }

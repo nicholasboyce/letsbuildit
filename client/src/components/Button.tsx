@@ -1,24 +1,29 @@
 import styles from './Button.module.css';
 import GithubLogo from './GithubLogo';
+import useWindowDimensions from '../utils/useWindowDimensions';
 
 interface ButtonProps extends HTMLButtonElement {
-    size?: string;
+    authType?: string;
     signedIn?: boolean;
 }
 
-const Button = ({size, signedIn, ...props} : ButtonProps) => {
+const Button = ({authType, signedIn, ...props} : ButtonProps) => {
+    const { width: screenSize } = useWindowDimensions();
     let text = '';
     if (signedIn) {
         text = 'Log Out';
     } else {
-        if (size == 'small') {
-            text = 'Log In With Github';
+        if (authType == 'login') {
+            text = 'Log In';
         } else {
-            text = 'Sign Up With Github';
+            text = 'Sign Up';
+        }
+        if (screenSize >= 360) {
+            text = text.concat(' With Github');
         }
     }
     return (
-        <button className={`${styles.btn} ${styles[size]}`}>
+        <button className={`${styles.btn} ${styles.authType}`}>
             <GithubLogo />
             {text}
         </button>
