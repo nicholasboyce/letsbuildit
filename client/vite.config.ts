@@ -4,7 +4,6 @@ import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  root: resolve(__dirname, 'client'),
   build: {
     emptyOutDir: true,
     outDir: resolve(__dirname, 'src/main/resources/static'),
