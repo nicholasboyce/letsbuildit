@@ -1,0 +1,4 @@
+interface GithubUser {
+    username: string;
+    
+}

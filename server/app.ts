@@ -1,6 +1,7 @@
 import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
+import './strategies/github-strategy';
 
 
 const app = express();
@@ -19,6 +20,9 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.get('/api/auth/github', passport.authenticate('github'));
+app.get('/api/auth/github/redirect', passport.authenticate('github'));
 
 
 export default app;
