@@ -45,8 +45,9 @@ describe('Github Repository', () => {
         };
 
         const user = await createUser(newUser);
+        const updatedUser = await updateUser(user.id, { username: 'sarahBEARA' });
 
-
+        assert.strictEqual(updatedUser.username, 'sarahBEARA');
     });
 
     after(async () => {
