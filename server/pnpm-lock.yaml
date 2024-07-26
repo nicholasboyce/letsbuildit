@@ -17,12 +17,18 @@ dependencies:
   express-session:
     specifier: ^1.18.0
     version: 1.18.0
+  kysely:
+    specifier: ^0.27.4
+    version: 0.27.4
   passport:
     specifier: ^0.7.0
     version: 0.7.0
   passport-github2:
     specifier: ^0.1.12
     version: 0.1.12
+  passport-oauth2:
+    specifier: ^1.8.0
+    version: 1.8.0
 
 devDependencies:
   '@types/express':
@@ -37,6 +43,9 @@ devDependencies:
   '@types/passport-github2':
     specifier: ^1.2.9
     version: 1.2.9
+  '@types/passport-oauth2':
+    specifier: ^1.4.17
+    version: 1.4.17
   nodemon:
     specifier: ^3.1.4
     version: 3.1.4
@@ -776,6 +785,11 @@ packages:
     resolution: {integrity: sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==}
     engines: {node: '>=0.12.0'}
     dev: true
+
+  /kysely@0.27.4:
+    resolution: {integrity: sha512-dyNKv2KRvYOQPLCAOCjjQuCk4YFd33BvGdf/o5bC7FiW+BB6snA81Zt+2wT9QDFzKqxKa5rrOmvlK/anehCcgA==}
+    engines: {node: '>=14.0.0'}
+    dev: false
 
   /make-dir@3.1.0:
     resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}
