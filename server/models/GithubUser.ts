@@ -7,8 +7,10 @@ import {
     Updateable,
 } from 'kysely';
 
+import { UUID } from 'crypto';
+
 export interface GithubUserTable {
-    id: Generated<number>
+    id: Generated<UUID>
     username: string
     githubID: number
 };
