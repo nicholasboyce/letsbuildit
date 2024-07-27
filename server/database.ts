@@ -1,17 +1,18 @@
-import { Database } from './models/database' // this is the Database interface we defined earlier
-import { Pool } from 'pg'
-import { Kysely, PostgresDialect } from 'kysely'
+import { Database } from './models/database'; // this is the Database interface we defined earlier
+import { Pool } from 'pg';
+import { Kysely, PostgresDialect } from 'kysely';
+import config from './utils/config';
 
 const dialect = new PostgresDialect({
   pool: new Pool({
-    database: 'testDB',
+    database: config.POSTGRESDB_NAME,
     host: 'localhost',
     user: 'root',
     port: 5434,
     max: 10,
     password: 'password'
   })
-})
+});
 
 // Database interface is passed to Kysely's constructor, and from now on, Kysely 
 // knows your database structure.

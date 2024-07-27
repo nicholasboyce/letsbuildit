@@ -14,6 +14,7 @@ export const findUserById = async (id: UUID) => {
     return await db.selectFrom('githubUser')
         .where('id', '=', id)
         .selectAll()
+        .$assertType<GithubUser>()
         .executeTakeFirstOrThrow();
 };
 

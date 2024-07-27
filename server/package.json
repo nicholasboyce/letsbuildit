@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "node --import tsx --test tests/**/*Test.ts",
+    "test": "NODE_ENV=test node --import tsx --test tests/**/*Test.ts",
     "start": "NODE_ENV=production node ./dist/index.js",
     "dev": "NODE_ENV=development PORT=7777 nodemon index.ts",
-    "postgres:dev": "docker run --name lbiDB -p 5434:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=password -d postgres:latest",
-    "createDB:test": "docker exec -it lbiTestDB createdb --username=root --owner=root testDB",
-    "dropDB:test": "docker exec -it lbiTestDB testDB",
-    "enterDB:test": "docker exec -it lbiTestDB psql",
-    "postgres:test": "docker run --name lbiTestDB -p 5434:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=password -d postgres:latest"
+    "postgres:init": "docker run --name lbiDB -p 5434:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=password -d postgres:latest",
+    "createDB:dev": "docker exec -it lbiDB createdb --username=root --owner=root devDB",
+    "createDB:test": "docker exec -it lbiDB createdb --username=root --owner=root testDB",
+    "dropDB:dev": "docker exec -it lbiDB devDB",
+    "dropDB:test": "docker exec -it lbiDB testDB",
+    "enterDB": "docker exec -it lbiDB psql"
   },
   "keywords": [],
   "author": "",

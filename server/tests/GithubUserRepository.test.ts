@@ -1,18 +1,17 @@
 import { describe, test, before, after, beforeEach } from 'node:test';
 import { db } from '../database';
 import assert from 'node:assert';
-import app from '../app';
-import { GithubUser, NewGithubUser } from '../models/GithubUser';
+import { NewGithubUser } from '../models/GithubUser';
 import { createUser, findUserById, deleteAll, updateUser } from '../repositories/GithubUserRepository';
 import crypto from 'node:crypto';
 
-describe('Github Repository', () => {
+describe('GithubUser Repository', () => {
     before(async () => {
         await db.schema.createTable('githubUser')
             .ifNotExists()
             .addColumn('id', 'uuid', (col) => col.primaryKey())
-            .addColumn('username', 'varchar(50)', (col) => col.notNull())
-            .addColumn('githubID', 'integer', (col) => col.notNull())
+            .addColumn('username', 'varchar(50)', (col) => col.notNull().unique())
+            .addColumn('githubID', 'integer', (col) => col.notNull().unique())
             .execute();
     });
 
@@ -48,9 +47,12 @@ describe('Github Repository', () => {
         const updatedUser = await updateUser(user.id, { username: 'sarahBEARA' });
 
         assert.strictEqual(updatedUser.username, 'sarahBEARA');
+
+        const storedUser = await findUserById(user.id);
+        assert.deepStrictEqual(storedUser, updatedUser);
     });
 
     after(async () => {
         await db.schema.dropTable('githubUser').execute();
-    })
+    });
 });
