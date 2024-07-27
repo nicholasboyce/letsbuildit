@@ -15,7 +15,15 @@ export const findUserById = async (id: UUID) => {
         .where('id', '=', id)
         .selectAll()
         .$assertType<GithubUser>()
-        .executeTakeFirstOrThrow();
+        .executeTakeFirst();
+};
+
+export const findUserByGithubId = async (id: any) => {
+    return await db.selectFrom('githubUser')
+        .where('githubID', '=', id)
+        .selectAll()
+        .$assertType<GithubUser>()
+        .executeTakeFirst();
 };
 
 export const deleteAll = async () => {

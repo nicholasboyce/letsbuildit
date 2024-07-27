@@ -12,7 +12,7 @@ import { UUID } from 'crypto';
 export interface GithubUserTable {
     id: Generated<UUID>
     username: string
-    githubID: number
+    githubID: string
 };
 
 export type GithubUser = Selectable<GithubUserTable>;

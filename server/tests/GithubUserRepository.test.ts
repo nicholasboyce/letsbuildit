@@ -11,7 +11,7 @@ describe('GithubUser Repository', () => {
             .ifNotExists()
             .addColumn('id', 'uuid', (col) => col.primaryKey())
             .addColumn('username', 'varchar(50)', (col) => col.notNull().unique())
-            .addColumn('githubID', 'integer', (col) => col.notNull().unique())
+            .addColumn('githubID', 'varchar(50)', (col) => col.notNull().unique())
             .execute();
     });
 
@@ -23,7 +23,7 @@ describe('GithubUser Repository', () => {
         const newUser : NewGithubUser = {
             id: crypto.randomUUID(),
             username: 'sarah1',
-            githubID: 123
+            githubID: '123'
         };
 
         const user = await createUser(newUser);
@@ -40,7 +40,7 @@ describe('GithubUser Repository', () => {
         const newUser : NewGithubUser = {
             id: crypto.randomUUID(),
             username: 'sarah1',
-            githubID: 123
+            githubID: '123'
         };
 
         const user = await createUser(newUser);
