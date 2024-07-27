@@ -4,9 +4,11 @@ import crypto from 'node:crypto';
 import config from '../utils/config';
 import { NewGithubUser } from '../models/GithubUser';
 import * as GithubUserRepository from '../repositories/GithubUserRepository';
-import { VerifyCallback } from 'passport-oauth2';
+import { VerifyCallback, VerifyFunctionWithRequest } from 'passport-oauth2';
+import e from 'express';
 
-const verifyFunction = async (accessToken: string, refreshToken: string, profile: Profile, done: VerifyCallback) => {
+
+const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, accessToken: string, refreshToken: string, profile: Profile, done: VerifyCallback) => {
     let findUser;
     try {
         findUser = await GithubUserRepository.findUserByGithubId(profile.id);
@@ -21,6 +23,7 @@ const verifyFunction = async (accessToken: string, refreshToken: string, profile
                 githubID: profile.id,
             };
             const savedUser = await GithubUserRepository.createUser(newUser);
+            // req.session.refreshToken = refreshToken;
             return done(null, savedUser);
         }
         return done(null, findUser);
@@ -31,8 +34,7 @@ const verifyFunction = async (accessToken: string, refreshToken: string, profile
 };
 
 passport.serializeUser((user, done) => {
-    console.log(user);
-    done(null, user.githubID);
+    return done(null, user.githubID);
 });
 
 passport.deserializeUser(async (id, done) => {
@@ -51,6 +53,7 @@ passport.use(
             clientID: config.GITHUB_CLIENT_ID,
             clientSecret: config.GITHUB_CLIENT_SECRET,
             callbackURL: 'http://localhost:7777/api/auth/github/redirect',
+            passReqToCallback: true
         },
         verifyFunction
     )
