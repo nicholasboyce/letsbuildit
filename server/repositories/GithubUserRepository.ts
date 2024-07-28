@@ -31,7 +31,7 @@ export const findUserById = async (id: UUID) => {
 };
 
 /** Searches database for GithubUser by Github ID and returns the user or undefined if not found. */
-export const findUserByGithubId = async (id: any) => {
+export const findUserByGithubId = async (id: string) => {
     return await db.selectFrom('githubUser')
         .where('githubID', '=', id)
         .selectAll()

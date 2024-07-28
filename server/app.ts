@@ -17,7 +17,7 @@ db.connection()
         console.log(`Connected to Postgres database`);
     })
     .catch((err) => {
-        console.log(`Error connecting to Postgres database: ${err.message}`);
+        console.error(`Error connecting to Postgres database: ${err}`);
     });
 const app = express();
 
@@ -42,9 +42,9 @@ app.get(
     passport.authenticate('github'),
     (request, response) => {
         console.log(request.session);
-        console.log(request.user);
-        console.log(request.session.id);
-        response.redirect('/');
+        request.session.visited = true;
+        response.sendStatus(200);
+        // response.redirect('/');
     }
 );
 

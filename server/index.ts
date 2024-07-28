@@ -6,8 +6,5 @@ app.listen(config.PORT, () => {
 });
 
 app.get('/', (request, response) => {
-    console.log(request.session);
-    console.log(request.session.id);
-    console.log(request.user);
-    response.status(200).send({msg: 'hello'});
+    response.status(200).send(request.user);
 });

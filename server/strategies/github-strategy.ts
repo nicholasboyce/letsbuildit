@@ -9,6 +9,9 @@ import e from 'express';
 
 
 const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, accessToken: string, refreshToken: string, profile: Profile, done: VerifyCallback) => {
+    console.log('Inside verify function.');
+    // console.log(`Profile: ${JSON.stringify(profile)}`);
+    console.log(`Access token: ${accessToken}; Refresh token: ${refreshToken}`);
     let findUser;
     try {
         findUser = await GithubUserRepository.findUserByGithubId(profile.id);
@@ -23,10 +26,9 @@ const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, access
                 githubID: profile.id,
             };
             const savedUser = await GithubUserRepository.createUser(newUser);
-            // req.session.refreshToken = refreshToken;
-            return done(null, savedUser);
+            return done(null, {...savedUser, accessToken});
         }
-        return done(null, findUser);
+        return done(null, {...findUser, accessToken});
     } catch (error) {
         console.log(error);
         return done(error, false);
@@ -34,10 +36,16 @@ const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, access
 };
 
 passport.serializeUser((user, done) => {
-    return done(null, user.githubID);
+    console.log('Inside serialize function.');
+    return done(null, {
+        githubID: user.githubID,
+        accessToken: user.accessToken
+    });
 });
 
-passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (user: any, done) => {
+    const id = user.githubID;
+    console.log('Inside deserialize function.');
     try {
         const findUser = await GithubUserRepository.findUserByGithubId(id);
         return findUser ? done(null, findUser) : done(null, null);
