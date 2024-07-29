@@ -37,6 +37,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.static('dist/client'));
+
 app.get('/api/auth/github', passport.authenticate('github'));
 app.get(
     '/api/auth/github/redirect', 
@@ -50,6 +52,10 @@ app.get(
 );
 app.get('/api/auth/status', (request, response) => {
     response.status(200).send(request.user);
+});
+
+app.get('(/*)?', async (req, res, next) => {
+    res.sendFile('dist/client/index.html', { root: __dirname });
 });
 
 

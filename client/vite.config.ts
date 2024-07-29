@@ -6,9 +6,9 @@ import { resolve } from 'path'
 export default defineConfig({
   build: {
     emptyOutDir: true,
-    outDir: resolve(__dirname, 'src/main/resources/static'),
+    outDir: resolve(__dirname, '../server/dist/client'),
     rollupOptions: {
-      input: resolve(__dirname, 'client/index.html')
+      input: resolve(__dirname, 'index.html')
     }
   },
   plugins: [react()],
