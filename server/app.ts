@@ -1,4 +1,5 @@
 import express from 'express';
+import 'express-async-errors';
 import session from 'express-session';
 import passport from 'passport';
 import { db } from './database';
@@ -47,6 +48,9 @@ app.get(
         // response.redirect('/');
     }
 );
+app.get('/api/auth/status', (request, response) => {
+    response.status(200).send(request.user);
+});
 
 
 export default app;
