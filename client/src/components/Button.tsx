@@ -9,6 +9,9 @@ interface ButtonProps extends HTMLButtonElement {
 
 const Button = ({authType, signedIn, ...props} : ButtonProps) => {
     const { width: screenSize } = useWindowDimensions();
+    const onClick = () => {
+        window.location.assign('/api/auth/github');
+    };
     let text = '';
     if (signedIn) {
         text = 'Log Out';
@@ -23,7 +26,7 @@ const Button = ({authType, signedIn, ...props} : ButtonProps) => {
         }
     }
     return (
-        <button className={`${styles.btn} ${styles.authType}`}>
+        <button className={`${styles.btn} ${styles.authType}`} onClick={onClick}>
             <GithubLogo />
             {text}
         </button>
