@@ -2,7 +2,7 @@ import styles from './Button.module.css';
 import GithubLogo from './GithubLogo';
 import useWindowDimensions from '../utils/useWindowDimensions';
 
-interface ButtonProps extends HTMLButtonElement {
+interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
     authType?: string;
     signedIn?: boolean;
 }
@@ -26,7 +26,7 @@ const Button = ({authType, signedIn, ...props} : ButtonProps) => {
         }
     }
     return (
-        <button className={`${styles.btn} ${styles.authType}`} onClick={onClick}>
+        <button className={`${styles.btn} ${styles.authType}`} onClick={onClick} {...props}>
             <GithubLogo />
             {text}
         </button>

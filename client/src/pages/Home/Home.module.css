@@ -42,10 +42,6 @@
     font-weight: bold;
 }
 
-.hero-text {
-    /* font-size: var(--fs-800); */
-}
-
 @media screen and (min-width: 685px) {
     .main-landmark {
         display: grid;
