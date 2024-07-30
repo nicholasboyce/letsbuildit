@@ -6,11 +6,11 @@ import config from './utils/config';
 const dialect = new PostgresDialect({
   pool: new Pool({
     database: config.POSTGRESDB_NAME,
-    host: 'localhost',
-    user: 'root',
-    port: 5434,
+    host: config.POSTGRESDB_HOST,
+    user: config.POSTGRESDB_USER,
+    port: config.POSTGRESDB_PORT,
     max: 10,
-    password: 'password'
+    password: config.POSTGRESDB_PASSWORD
   })
 });
 

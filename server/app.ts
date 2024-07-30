@@ -6,6 +6,7 @@ import { db } from './database';
 import logger from './utils/logger';
 import middleware from './utils/middleware';
 import Router from './router';
+import config from './utils/config';
 
 
 db.connection()
@@ -30,7 +31,7 @@ const app = express();
 app.use(express.json());
 app.use(
     session({
-        secret: 'temp_secret',
+        secret: config.SESSION_SECRET,
         saveUninitialized: false,
         resave: false,
         cookie: {
