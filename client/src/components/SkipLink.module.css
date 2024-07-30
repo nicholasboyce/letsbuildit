@@ -1,0 +1,21 @@
+.skip-nav-link {
+    background-color: var(--neutral-color-1100);
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.25rem 0.25rem;
+    display: inline-block;
+    margin-block-end: 0.5rem;
+    margin-inline: auto;
+    position: absolute;
+    transform: translateY(-170%);
+    transition: transform 325ms ease-in;
+    outline-color: var(--neutral-color-100);
+}
+
+.skip-nav-link:focus {
+    transform: translateY(5%);
+}
+
+.skip-nav-link:visited, 
+.skip-nav-link:link {
+    color: var(--neutral-color-100);
+}
