@@ -4,6 +4,8 @@ import session from 'express-session';
 import passport from 'passport';
 import { db } from './database';
 import './strategies/github-strategy';
+import logger from './utils/logger';
+import middleware from './utils/middleware';
 
 db.connection()
     .execute(async (db) => {
@@ -15,10 +17,10 @@ db.connection()
             .execute();
     })
     .then(() => {
-        console.log(`Connected to Postgres database`);
+        logger.info(`Connected to Postgres database`);
     })
     .catch((err) => {
-        console.error(`Error connecting to Postgres database: ${err}`);
+        logger.error(`Error connecting to Postgres database: ${err}`);
     });
 const app = express();
 
@@ -38,14 +40,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static('dist/client'));
+app.use(middleware.requestLogger);
 
 app.get('/api/auth/github', passport.authenticate('github'));
 app.get(
     '/api/auth/github/redirect', 
     passport.authenticate('github'),
     (request, response) => {
-        console.log(request.session);
-        request.session.visited = true;
+        logger.info(request.session);
         response.sendStatus(200);
         // response.redirect('/');
     }
