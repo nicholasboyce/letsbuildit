@@ -15,3 +15,5 @@ PostgreSQL.
 - I've used this previously and it seems to be an increasingly popular option over MySQL. 
 - It would be a good choice for practicing SQL, and is good for write-heavy apps (which may likely be the case).
 - There are a large amount of up to date resources regarding using Postgres.
+
+I've also decided to go with Kysely, a type-safe SQL query builder, so that I'm not too divorced from the process of writing and understanding SQL.

@@ -9,3 +9,7 @@ Lastly, this method needs to be integrateable with other services - the current 
 ## Considered Options
 - Session IDs
 - JWTs
+
+### Decision Outcome
+Session IDs. 
+I like the simplicity of them, and I also enjoy the way I can use Session IDs to manage other important things, like having access tokens at the ready.
