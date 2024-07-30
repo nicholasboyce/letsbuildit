@@ -1,6 +1,5 @@
-import NavBar from './NavBar';
 import Button from '../../components/Button';
-import SkipLink from '../../components/SkipLink';
+import PageHeader from '../../components/PageHeader';
 import styles from './Home.module.css';
 import HeroImage from '../../assets/mobile-testing-isometric.png';
 
@@ -9,10 +8,7 @@ const Home = () => {
     return (
         <div className={`${styles["homepage-wrapper"]}`}>
             <div className={`${styles["homepage"]}`}>
-                <header className={styles["page-header"]}>
-                    <SkipLink />
-                    <NavBar />
-                </header>
+                <PageHeader />
                 <main className={styles["main-landmark"]}>
                     <img src={HeroImage} className={styles["hero-image"]} alt='' />
                     <section aria-label='Hero' className={styles["hero-section"]}>

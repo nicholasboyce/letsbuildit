@@ -12,12 +12,6 @@
     margin: 0 auto;
 }
 
-.page-header {
-    display: flex;
-    flex-direction: column;
-    margin-block-start: var(--gap-500);
-}
-
 .hero-section {
     display: flex;
     justify-content: center;

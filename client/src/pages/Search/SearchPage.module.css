@@ -1,0 +1,13 @@
+.page-wrapper {
+    background-image: linear-gradient(var(--neutral-color-100), 85%, var(--primary-color-400));
+    font-family: var(--ff-heading);
+}
+
+.page {
+    display: grid;
+    min-height: 100vh;
+    min-height: 100svh;
+    grid-template-rows: auto 1fr;
+    width: min(78.5rem, 90vw);
+    margin: 0 auto;
+}
