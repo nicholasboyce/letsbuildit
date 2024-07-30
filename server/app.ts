@@ -3,9 +3,10 @@ import 'express-async-errors';
 import session from 'express-session';
 import passport from 'passport';
 import { db } from './database';
-import './strategies/github-strategy';
 import logger from './utils/logger';
 import middleware from './utils/middleware';
+import Router from './router';
+
 
 db.connection()
     .execute(async (db) => {
@@ -22,6 +23,8 @@ db.connection()
     .catch((err) => {
         logger.error(`Error connecting to Postgres database: ${err}`);
     });
+
+
 const app = express();
 
 app.use(express.json());
@@ -42,20 +45,7 @@ app.use(passport.session());
 app.use(express.static('dist/client'));
 app.use(middleware.requestLogger);
 
-app.get('/api/auth/github', passport.authenticate('github'));
-app.get(
-    '/api/auth/github/redirect', 
-    passport.authenticate('github'),
-    (request, response) => {
-        logger.info(request.session);
-        response.sendStatus(200);
-        // response.redirect('/');
-    }
-);
-app.get('/api/auth/status', (request, response) => {
-    response.status(200).send(request.user);
-});
-
+app.use('/api', Router);
 app.get('(/*)?', async (req, res, next) => {
     res.sendFile('dist/client/index.html', { root: __dirname });
 });
