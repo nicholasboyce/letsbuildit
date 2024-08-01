@@ -5,12 +5,13 @@ import config from '../utils/config';
 import logger from '../utils/logger';
 import { NewGithubUser } from '../models/GithubUser';
 import * as GithubUserRepository from '../repositories/GithubUserRepository';
-import { VerifyCallback, VerifyFunction } from 'passport-oauth2';
+import { VerifyCallback, VerifyFunctionWithRequest } from 'passport-oauth2';
+import e from 'express-serve-static-core';
 
-
-const verifyFunction : VerifyFunction = async (accessToken: string, refreshToken: string, profile: Profile, done: VerifyCallback) => {
+const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, accessToken: string, refreshToken: string, profile: Profile, done: VerifyCallback) => {
     logger.info('Inside verify function.');
     logger.info(`Access token: ${accessToken}; Refresh token: ${refreshToken}`);
+    logger.info(req.sessionID);
     let findUser;
     try {
         findUser = await GithubUserRepository.findUserByGithubId(profile.id);
@@ -25,8 +26,14 @@ const verifyFunction : VerifyFunction = async (accessToken: string, refreshToken
                 githubID: profile.id,
             };
             const savedUser = await GithubUserRepository.createUser(newUser);
+            req.session.accessToken = accessToken;
+            req.session.save();
+            console.log(req.session);
             return done(null, {...savedUser, accessToken});
         }
+        req.session.accessToken = accessToken;
+        req.session.save();
+        console.log(req.session);
         return done(null, {...findUser, accessToken});
     } catch (error) {
         logger.error(error);
@@ -59,7 +66,8 @@ passport.use(
         {
             clientID: config.GITHUB_CLIENT_ID,
             clientSecret: config.GITHUB_CLIENT_SECRET,
-            callbackURL: `http://${config.APP_HOST}:${config.PORT}/api/auth/github/redirect`
+            callbackURL: `http://${config.APP_HOST}:${config.PORT}/api/auth/github/redirect`,
+            passReqToCallback: true
         },
         verifyFunction
     )

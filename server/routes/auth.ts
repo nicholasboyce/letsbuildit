@@ -7,9 +7,11 @@ const authRouter = express.Router();
 authRouter.get('/github', passport.authenticate('github'));
 authRouter.get(
     '/github/redirect', 
-    passport.authenticate('github'),
+    passport.authenticate('github', {keepSessionInfo: true}),
     (request, response) => {
-        response.sendStatus(200);
+        console.log(request.session);
+        console.log(request.sessionID);
+        response.status(200);
         response.redirect('/');
     }
 );
