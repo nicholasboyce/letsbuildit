@@ -9,9 +9,7 @@ import { VerifyCallback, VerifyFunctionWithRequest } from 'passport-oauth2';
 import e from 'express-serve-static-core';
 
 const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, accessToken: string, refreshToken: string, profile: Profile, done: VerifyCallback) => {
-    logger.info('Inside verify function.');
-    logger.info(`Access token: ${accessToken}; Refresh token: ${refreshToken}`);
-    logger.info(req.sessionID);
+    // logger.info(`Access token: ${accessToken}; Refresh token: ${refreshToken}`);
     let findUser;
     try {
         findUser = await GithubUserRepository.findUserByGithubId(profile.id);
@@ -27,14 +25,10 @@ const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, access
             };
             const savedUser = await GithubUserRepository.createUser(newUser);
             req.session.accessToken = accessToken;
-            // req.session.save();
-            logger.info(req.session);
-            return done(null, {...savedUser, accessToken});
+            return done(null, savedUser);
         }
         req.session.accessToken = accessToken;
-        // req.session.save();
-        logger.info(req.session);
-        return done(null, {...findUser, accessToken});
+        return done(null, findUser);
     } catch (error) {
         logger.error(error);
         return done(error, false);
@@ -42,16 +36,10 @@ const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, access
 };
 
 passport.serializeUser((user, done) => {
-    logger.info('Inside serialize function.');
-    return done(null, {
-        githubID: user.githubID,
-        accessToken: user.accessToken
-    });
+    return done(null, user.githubID);
 });
 
-passport.deserializeUser(async (user: any, done) => {
-    const id = user.githubID;
-    logger.info('Inside deserialize function.');
+passport.deserializeUser(async (id: any, done) => {
     try {
         const findUser = await GithubUserRepository.findUserByGithubId(id);
         return findUser ? done(null, findUser) : done(null, null);

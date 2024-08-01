@@ -8,11 +8,8 @@ authRouter.get('/github', passport.authenticate('github'));
 authRouter.get(
     '/github/redirect', 
     passport.authenticate('github', {keepSessionInfo: true}),
-    (request, response) => {
-        console.log(request.session);
-        console.log(request.sessionID);
-        response.status(200);
-        response.redirect('/');
+    (_, response) => {
+        response.status(200).redirect('/');
     }
 );
 authRouter.get('/status', (request, response) => {
