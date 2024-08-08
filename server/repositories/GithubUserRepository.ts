@@ -22,7 +22,7 @@ export const createUser = async (user: NewGithubUser) : Promise<GithubUser> => {
 };
 
 /** Searches database for GithubUser by UUID generated on the server and returns the user or undefined if not found. */
-export const findUserById = async (id: UUID) => {
+export const findUserById = async (id: UUID) : Promise<GithubUser | undefined> => {
     return await db.selectFrom('githubUser')
         .where('id', '=', id)
         .selectAll()
@@ -31,7 +31,7 @@ export const findUserById = async (id: UUID) => {
 };
 
 /** Searches database for GithubUser by Github ID and returns the user or undefined if not found. */
-export const findUserByGithubId = async (id: string) => {
+export const findUserByGithubId = async (id: string) : Promise<GithubUser | undefined> => {
     return await db.selectFrom('githubUser')
         .where('githubID', '=', id)
         .selectAll()
@@ -46,7 +46,7 @@ export const deleteAll = async () => {
 };
 
 /** Identifies and updates GithubUser with corresponding UUID in database with new user data provided. Returns the updated GithubUser, and throws an error if this process fails. */
-export const updateUser = async (id: UUID, user: UpdateGithubUser) => {
+export const updateUser = async (id: UUID, user: UpdateGithubUser) : Promise<GithubUser> => {
     return await db.updateTable('githubUser')
         .set(user)
         .where('id', '=', id)

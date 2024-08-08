@@ -6,7 +6,6 @@ declare global {
         interface User {
             id?: UUID
             githubID?: string
-            accessToken?: string
         }
     }
 }

@@ -47,7 +47,7 @@ app.use(express.static('dist/client'));
 app.use(middleware.requestLogger);
 
 app.use('/api', Router);
-app.get('(/*)?', async (req, res, next) => {
+app.get('(/*)?', async (_, res, next) => {
     res.sendFile('dist/client/index.html', { root: __dirname });
 });
 
