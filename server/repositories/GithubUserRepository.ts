@@ -3,7 +3,7 @@ import { GithubUser, NewGithubUser, UpdateGithubUser } from "../models/GithubUse
 import { UUID } from "crypto";
 
 /** Creates GithubUserTable. */
-export const createGithubUserTable = async () => {
+const createGithubUserTable = async () => {
     await db.schema.createTable('githubUser')
         .ifNotExists()
         .addColumn('id', 'uuid', (col) => col.primaryKey())
@@ -13,7 +13,7 @@ export const createGithubUserTable = async () => {
 };
 
 /** Inserts NewGithubUser into githubUser table and returns the inserted GithubUser. Throws an error if this process fails.  */
-export const createUser = async (user: NewGithubUser) : Promise<GithubUser> => {
+const createUser = async (user: NewGithubUser) : Promise<GithubUser> => {
     return await db.insertInto('githubUser')
         .values(user)
         .returningAll()
@@ -22,7 +22,7 @@ export const createUser = async (user: NewGithubUser) : Promise<GithubUser> => {
 };
 
 /** Searches database for GithubUser by UUID generated on the server and returns the user or undefined if not found. */
-export const findUserById = async (id: UUID) : Promise<GithubUser | undefined> => {
+const findUserById = async (id: UUID) : Promise<GithubUser | undefined> => {
     return await db.selectFrom('githubUser')
         .where('id', '=', id)
         .selectAll()
@@ -31,7 +31,7 @@ export const findUserById = async (id: UUID) : Promise<GithubUser | undefined> =
 };
 
 /** Searches database for GithubUser by Github ID and returns the user or undefined if not found. */
-export const findUserByGithubId = async (id: string) : Promise<GithubUser | undefined> => {
+const findUserByGithubId = async (id: string) : Promise<GithubUser | undefined> => {
     return await db.selectFrom('githubUser')
         .where('githubID', '=', id)
         .selectAll()
@@ -40,17 +40,26 @@ export const findUserByGithubId = async (id: string) : Promise<GithubUser | unde
 };
 
 /** Deletes all rows from githubUser table. */
-export const deleteAll = async () => {
+const deleteAll = async () => {
     await db.deleteFrom('githubUser')
         .execute();
 };
 
 /** Identifies and updates GithubUser with corresponding UUID in database with new user data provided. Returns the updated GithubUser, and throws an error if this process fails. */
-export const updateUser = async (id: UUID, user: UpdateGithubUser) : Promise<GithubUser> => {
+const updateUser = async (id: UUID, user: UpdateGithubUser) : Promise<GithubUser> => {
     return await db.updateTable('githubUser')
         .set(user)
         .where('id', '=', id)
         .returningAll()
         .$assertType<GithubUser>()
         .executeTakeFirstOrThrow();
+};
+
+export const GithubUserRepository = {
+    createGithubUserTable,
+    createUser,
+    findUserByGithubId,
+    findUserById,
+    deleteAll,
+    updateUser
 };

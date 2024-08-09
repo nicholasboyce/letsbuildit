@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from 'passport';
-import * as authController from '../controllers/auth';
+import { authController } from '../controllers/auth';
 import '../strategies/github-strategy';
 
 const authRouter = express.Router();
@@ -15,4 +15,6 @@ authRouter.get(
 );
 authRouter.get('/status', authController.getUserStatus);
 
-export default authRouter;
+export {
+    authRouter
+};

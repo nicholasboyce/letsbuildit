@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express-serve-static-core';
-import * as authService from '../services/auth';
+import { authService } from '../services/auth';
 
-export const getUserStatus: RequestHandler = (request, response) => {
+const getUserStatus: RequestHandler = (request, response) => {
     const authenticated = authService.getUserStatus(request.user);
     if (authenticated) {
         console.log(request.session.accessToken);
@@ -9,4 +9,8 @@ export const getUserStatus: RequestHandler = (request, response) => {
     } else {
         response.status(401).json({error: 'User unauthenticated'});
     }
+};
+
+export const authController = {
+    getUserStatus
 };

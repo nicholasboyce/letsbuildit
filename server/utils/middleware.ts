@@ -1,4 +1,4 @@
-import logger from "./logger";
+import { logger } from "./logger";
 import { RequestHandler } from "express-serve-static-core";
 
 const requestLogger : RequestHandler = (request, response, next) => {
@@ -10,8 +10,6 @@ const requestLogger : RequestHandler = (request, response, next) => {
     next()
 };
 
-const middleware = {
+export const middleware = {
     requestLogger
 };
-
-export default middleware;

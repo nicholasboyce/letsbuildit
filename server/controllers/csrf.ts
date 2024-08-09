@@ -8,8 +8,6 @@ const getToken: RequestHandler = (request, response) => {
     response.json({ token: generateToken(request) });
 }
 
-const csrfController = {
+export const csrfController = {
     getToken
 };
-
-export default csrfController;

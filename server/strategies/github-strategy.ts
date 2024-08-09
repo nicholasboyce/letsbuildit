@@ -2,9 +2,9 @@ import passport from 'passport';
 import { Strategy, Profile } from 'passport-github2';
 import crypto from 'node:crypto';
 import config from '../utils/config';
-import logger from '../utils/logger';
+import { logger } from '../utils/logger';
 import { NewGithubUser } from '../models/GithubUser';
-import * as GithubUserRepository from '../repositories/GithubUserRepository';
+import { GithubUserRepository } from '../repositories/GithubUserRepository';
 import { VerifyCallback, VerifyFunctionWithRequest } from 'passport-oauth2';
 import e from 'express-serve-static-core';
 

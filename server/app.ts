@@ -3,9 +3,9 @@ import 'express-async-errors';
 import session from 'express-session';
 import passport from 'passport';
 import { db } from './database';
-import logger from './utils/logger';
-import middleware from './utils/middleware';
-import Router from './router';
+import { logger } from './utils/logger';
+import { middleware } from './utils/middleware';
+import { Router } from './router';
 import config from './utils/config';
 
 

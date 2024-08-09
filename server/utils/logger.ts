@@ -10,9 +10,7 @@ const error = (...params: any[]) => {
     }
 }
 
-const logger = {
+export const logger = {
     info,
     error
-}
-
-export default logger;
+};
