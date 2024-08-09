@@ -1,5 +1,5 @@
 import styles from './Button.module.css';
-import GithubLogo from './GithubLogo';
+import { GithubLogo } from './GithubLogo';
 import useWindowDimensions from '../utils/useWindowDimensions';
 
 interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
