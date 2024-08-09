@@ -1,10 +1,8 @@
-import Button from '../../components/Button';
-import PageHeader from '../../components/PageHeader';
+import { Button, PageHeader } from '../../components';
 import styles from './Home.module.css';
 import HeroImage from '../../assets/mobile-testing-isometric.png';
 
-
-const Home = () => {
+export const Home = () => {
     return (
         <div className={`${styles["homepage-wrapper"]}`}>
             <div className={`${styles["homepage"]}`}>
@@ -26,6 +24,4 @@ const Home = () => {
             </div>
         </div>
     )
-}
-
-export default Home;
+};

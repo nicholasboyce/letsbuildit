@@ -1,7 +1,7 @@
 import styles from './SearchPage.module.css';
-import PageHeader from "../../components/PageHeader";
+import { PageHeader } from '../../components';
 
-const SearchPage = () => {
+export const SearchPage = () => {
     return (
         <div className={`${styles["page-wrapper"]}`}>
             <div className={`${styles["page"]}`}>
@@ -26,5 +26,3 @@ const SearchPage = () => {
         </div>
     )
 };
-
-export default SearchPage;

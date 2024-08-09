@@ -1,8 +1,8 @@
 import styles from './PageHeader.module.css';
 import SkipLink from './SkipLink';
-import NavBar from '../pages/Home/NavBar';
+import { NavBar } from './NavBar';
 
-const PageHeader = () => {
+export const PageHeader = () => {
     return (
         <header className={styles["page-header"]}>
             <SkipLink />
@@ -10,5 +10,3 @@ const PageHeader = () => {
         </header>
     )
 };
-
-export default PageHeader;

@@ -7,7 +7,7 @@ interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
     signedIn?: boolean;
 }
 
-const Button = ({authType, signedIn, ...props} : ButtonProps) => {
+export const Button = ({authType, signedIn, ...props} : ButtonProps) => {
     const { width: screenSize } = useWindowDimensions();
     const onClick = () => {
         window.location.assign('/api/auth/github');
@@ -31,7 +31,4 @@ const Button = ({authType, signedIn, ...props} : ButtonProps) => {
             {text}
         </button>
     )
-}
-
-
-export default Button;
+};
