@@ -39,6 +39,15 @@ const findUserByGithubId = async (id: string) : Promise<GithubUser | undefined> 
         .executeTakeFirst();
 };
 
+/** Searches database for GithubUser by username and returns the user or undefined if not found. */
+const findUserByUsername = async (username: string) : Promise<GithubUser | undefined> => {
+    return await db.selectFrom('githubUser')
+        .where('username', '=', username)
+        .selectAll()
+        .$assertType<GithubUser>()
+        .executeTakeFirst();
+};
+
 /** Deletes all rows from githubUser table. */
 const deleteAll = async () => {
     await db.deleteFrom('githubUser')
@@ -60,6 +69,7 @@ export const GithubUserRepository = {
     createUser,
     findUserByGithubId,
     findUserById,
+    findUserByUsername,
     deleteAll,
     updateUser
 };
