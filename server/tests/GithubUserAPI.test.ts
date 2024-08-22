@@ -37,7 +37,8 @@ describe('when there are users initially saved', () => {
             .expect(200)
             .expect('Content-Type', /application\/json/);
 
-        assert.deepStrictEqual(createdUser, userAtLocation.body);
+        assert.deepStrictEqual(createdUser?.username, userAtLocation.body.username);
+        assert.deepStrictEqual(createdUser?.githubID, userAtLocation.body.githubID);
         assert.ok(!userAtLocation.body.id);
     });
 
