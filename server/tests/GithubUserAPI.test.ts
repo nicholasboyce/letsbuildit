@@ -9,6 +9,7 @@ import { NewGithubUser } from '../models/GithubUser';
 
 const browser = supertest.agent(app);
 
+//Test can be flakey... going to figure out a way to properly order all test suites which require database access.
 describe('when there are users initially saved', () => {
     before(async () => {
         await db.schema.createTable('githubUser')

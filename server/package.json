@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "NODE_ENV=test node --import tsx --test tests/**/*Test.ts",
+    "test": "NODE_ENV=test node --import tsx --test tests/**/*.test.ts",
     "start": "NODE_ENV=production node ./dist/index.js",
     "dev": "NODE_ENV=development PORT=7777 nodemon index.ts",
     "postgres:init": "docker run --name lbiDB -p 5434:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=password -d postgres:latest",
