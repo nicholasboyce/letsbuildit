@@ -23,9 +23,13 @@ const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, access
                 username: profile.username || '',
                 githubID: profile.id,
             };
-            const savedUser = await GithubUserRepository.createUser(newUser);
-            req.session.accessToken = accessToken;
-            return done(null, savedUser);
+            try {
+                const savedUser = await GithubUserRepository.createUser(newUser);
+                req.session.accessToken = accessToken;
+                return done(null, savedUser);
+            } catch (error) {
+                return done(error, false);
+            }
         }
         req.session.accessToken = accessToken;
         return done(null, findUser);
