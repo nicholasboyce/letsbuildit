@@ -14,6 +14,7 @@ describe('GithubUser Repository', () => {
             .addColumn('username', 'varchar(50)', (col) => col.notNull().unique())
             .addColumn('githubID', 'varchar(50)', (col) => col.notNull().unique())
             .execute();
+        console.log('Starting Repo Test');
     });
 
     beforeEach(async () => {
@@ -23,8 +24,8 @@ describe('GithubUser Repository', () => {
     test('successfully creates new user', async () => {
         const newUser : NewGithubUser = {
             id: crypto.randomUUID(),
-            username: 'sarah1',
-            githubID: '123'
+            username: 'sarah2',
+            githubID: '1234'
         };
 
         const user = await createUser(newUser);
@@ -40,8 +41,8 @@ describe('GithubUser Repository', () => {
     test('successfully updates existing user', async () => {
         const newUser : NewGithubUser = {
             id: crypto.randomUUID(),
-            username: 'sarah1',
-            githubID: '123'
+            username: 'sarah2',
+            githubID: '1234'
         };
 
         const user = await createUser(newUser);

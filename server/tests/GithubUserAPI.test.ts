@@ -45,5 +45,6 @@ describe('when there are users initially saved', () => {
 
     after(async () => {
         await db.schema.dropTable('githubUser').execute();
+        console.log('Done with API test');
     });
 });
