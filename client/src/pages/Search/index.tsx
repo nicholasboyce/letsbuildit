@@ -1,6 +1,7 @@
 import styles from './SearchPage.module.css';
 import { PageHeader } from '../../components';
 import { Select } from './components';
+import { useState } from 'react';
 
 const testOptions = [
     { label: 'First', value: 1 },
@@ -11,6 +12,7 @@ const testOptions = [
 ];
 
 export const SearchPage = () => {
+    const[value, setValue] = useState<typeof testOptions[0] | undefined>(testOptions[0]);
     return (
         <div tabIndex={0} className={`${styles["page-wrapper"]}`}>
             <div className={`${styles["page"]}`}>
@@ -32,7 +34,7 @@ export const SearchPage = () => {
                             <button type='submit'>Search Projects</button>
                         </form>
                     </search>
-                    <Select options={testOptions} />
+                    <Select options={testOptions} value={value} onChange={o => setValue(o)} />
                 </main>
             </div>
         </div>
