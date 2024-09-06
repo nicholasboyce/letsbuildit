@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './select.module.css';
 
 interface SelectOption {
     label: string
-    value: any
+    value: string | number
 }
 
 interface SelectProps {
@@ -14,7 +14,15 @@ interface SelectProps {
 
 export const Select = ({ options, value, onChange } : SelectProps) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [highlightedIndex, setHighlightedIndex] = useState(0);
+
     const clearOptions = () => onChange(undefined);
+    const selectOption = (option: SelectOption) => (option !== value) && onChange(option);
+    const isOptionSelected = (option: SelectOption) => option == value;
+
+    useEffect(() => {
+        if (isOpen) setHighlightedIndex(0);
+    }, [isOpen]);
 
     return (
         <div 
@@ -28,7 +36,7 @@ export const Select = ({ options, value, onChange } : SelectProps) => {
             <button
                 onClick={(e) => {
                     e.stopPropagation();
-                    clearOptions()
+                    clearOptions();
                 }} 
                 className={styles["clear-btn"]}
             >
@@ -37,8 +45,22 @@ export const Select = ({ options, value, onChange } : SelectProps) => {
             <div className={styles["divider"]}></div>
             <div className={styles["caret"]}></div>
             <ul className={`${styles["options"]} ${isOpen ? styles.show : ""}`} role='listbox'>
-                {options.map(option => (
-                    <li key={option.label} className={styles.option} role='option'>
+                {options.map((option, index) => (
+                    <li 
+                        onClick={e => {
+                            e.stopPropagation();
+                            selectOption(option);
+                            setIsOpen(false);
+                        }}
+                        onMouseEnter={() => setHighlightedIndex(index)} 
+                        key={option.value} 
+                        className={`
+                            ${styles.option} 
+                            ${isOptionSelected(option) ? styles.selected : ""}
+                            ${highlightedIndex == index ? styles.highlighted : ""}
+                        `} 
+                        role='option'
+                    >
                         {option.label}
                     </li>
                 ))}
