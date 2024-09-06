@@ -36,8 +36,8 @@
 
 .divider {
     background-color: #777;
-    align-content: stretch;
-    width: 0.5em;
+    align-self: stretch;
+    width: 0.05em;
 }
 
 .caret {
@@ -47,14 +47,36 @@
 }
 
 .options {
+    position: absolute;
     margin: 0;
     padding: 0;
     list-style: none;
-    display: none;
+    /* display: none; */
     max-height: 15em;
     overflow-y: auto;
+    border: 0.05em solid #777;
+    border-radius: 0.25em;
+    width: 100%;
+    left: 0;
+    top: calc(100% + .25em);
+    background-color: white;
+    z-index: 10;
 }
 
 .options.show {
     display: block;
+}
+
+.option {
+    padding: 0.25em .5em;
+    cursor: pointer;
+}
+
+.option.highlighted {
+    background-color: hsl(200, 100%, 50%);
+    color: white;
+}
+
+.option.selected {
+    background-color: hsl(200, 100%, 70%);
 }

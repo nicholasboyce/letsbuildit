@@ -32,7 +32,7 @@ export const SearchPage = () => {
                             <button type='submit'>Search Projects</button>
                         </form>
                     </search>
-                    {/* <Select options={testOptions} /> */}
+                    <Select options={testOptions} />
                 </main>
             </div>
         </div>
