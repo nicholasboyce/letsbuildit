@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './select.module.css';
 
-interface SelectOption {
+export interface SelectOption {
     label: string
     value: string | number
 }

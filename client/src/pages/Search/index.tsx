@@ -2,8 +2,9 @@ import styles from './SearchPage.module.css';
 import { PageHeader } from '../../components';
 import { Select } from './components';
 import { useState } from 'react';
+import { SelectOption } from './components/Select';
 
-const testOptions = [
+const testOptions : SelectOption[] = [
     { label: 'First', value: 1 },
     { label: 'Second', value: 2 },
     { label: 'Third', value: 3 },
