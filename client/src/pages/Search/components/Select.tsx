@@ -29,16 +29,16 @@ export const Select = ({ options, value, onChange } : SelectProps) => {
             onBlur={() => setIsOpen(false)}
             onClick={() => setIsOpen(prev => !prev)} 
             tabIndex={0} 
-            className={styles.container} 
-            role='combobox'
+            className={styles.container}
         >
-            <span className={styles["value"]}>{value?.label}</span>
+            <label className={styles["value"]} role='label'>{value?.label}</label>
             <button
                 onClick={(e) => {
                     e.stopPropagation();
                     clearOptions();
                 }} 
                 className={styles["clear-btn"]}
+                role='combobox'
             >
                 &times;
             </button>
