@@ -32,10 +32,10 @@ export const SearchPage = () => {
                             <select name="timezone" id="timezone"></select>
                             <label htmlFor="sortOrder">Sort By: </label>
                             <select name="sortOrder" id="sortOrder"></select>
+                            <Select options={testOptions} value={value} onChange={o => setValue(o)} />
                             <button type='submit'>Search Projects</button>
                         </form>
                     </search>
-                    <Select options={testOptions} value={value} onChange={o => setValue(o)} />
                 </main>
             </div>
         </div>
