@@ -6,7 +6,7 @@ export const usePostSearch = (params: URLSearchParams) => {
     const signal = abortController.signal;
 
     const base = new URL('./posts.json');
-    const url = base + params.toString();
+    const url = `${base}${params.toString()}`;
     const request = new Request(url, {
         method: "GET"
     });
@@ -23,6 +23,6 @@ export const usePostSearch = (params: URLSearchParams) => {
         return () => {
             abortController.abort();
         };
-    }, []);
+    }, [request]);
     return posts;
 };
