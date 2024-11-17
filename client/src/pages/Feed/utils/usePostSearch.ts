@@ -23,6 +23,6 @@ export const usePostSearch = (params: URLSearchParams) => {
         return () => {
             abortController.abort();
         };
-    }, [request]);
+    }, [request, signal]);
     return posts;
 };

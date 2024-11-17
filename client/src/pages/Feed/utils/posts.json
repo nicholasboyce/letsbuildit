@@ -1,0 +1,28 @@
+[
+    {
+        "id": 1,
+        "title": "",
+        "body": "",
+        "username": "",
+        "status": "open",
+        "created_at": "timestamp",
+        "difficulty": "novice",
+        "language": "Javascript",
+        "upvotes": 12,
+        "repo_link": "https://github.com/nicholasboyce/letsbuildit",
+        "team_members": [
+            {
+                "username": "",
+                "manager": true
+            },
+            {
+                "username": "",
+                "manager": false
+            },
+            {
+                "username": "",
+                "manager": false
+            }
+        ]
+    }
+]
