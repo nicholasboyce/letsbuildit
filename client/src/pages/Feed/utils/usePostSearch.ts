@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { ProjectPost } from "../../../../types";
 
 export const usePostSearch = (params: URLSearchParams) => {
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState<ProjectPost[]>([]);
     const abortController = new AbortController();
     const signal = abortController.signal;
 
