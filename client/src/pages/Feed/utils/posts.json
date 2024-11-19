@@ -4,6 +4,10 @@
         "title": "Building a New Git",
         "body": "Blah blah blah",
         "username": "githead",
+        "account": {
+            "username": "githead",
+            "timezone": "EST"
+        },
         "status": true,
         "created_at": "timestamp",
         "difficulty": "novice",
@@ -30,6 +34,70 @@
         "title": "Building a New Git",
         "body": "Blah blah blah",
         "username": "githead",
+        "account": {
+            "username": "githead",
+            "timezone": "EST"
+        },
+        "status": true,
+        "created_at": "timestamp",
+        "difficulty": "novice",
+        "language": "Javascript",
+        "upvotes": 12,
+        "repo_link": "https://github.com/nicholasboyce/letsbuildit",
+        "team_members": [
+            {
+                "username": "mickey",
+                "manager": true
+            },
+            {
+                "username": "donald",
+                "manager": false
+            },
+            {
+                "username": "goofy",
+                "manager": false
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Building a New Git",
+        "body": "Blah blah blah",
+        "username": "githead",
+        "account": {
+            "username": "githead",
+            "timezone": "EST"
+        },
+        "status": true,
+        "created_at": "timestamp",
+        "difficulty": "novice",
+        "language": "Javascript",
+        "upvotes": 12,
+        "repo_link": "https://github.com/nicholasboyce/letsbuildit",
+        "team_members": [
+            {
+                "username": "mickey",
+                "manager": true
+            },
+            {
+                "username": "donald",
+                "manager": false
+            },
+            {
+                "username": "goofy",
+                "manager": false
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "title": "Building a New Git",
+        "body": "Blah blah blah",
+        "username": "githead",
+        "account": {
+            "username": "githead",
+            "timezone": "EST"
+        },
         "status": true,
         "created_at": "timestamp",
         "difficulty": "novice",

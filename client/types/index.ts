@@ -5,11 +5,16 @@ const TeamMemberSchema = z.object({
     manager: z.boolean()
 });
 
+const UserAccountSchema = z.object({
+    username: z.string(),
+    timezone: z.string()
+});
+
 const ProjectPostSchema = z.object({
     id: z.number(),
     title: z.string(),
     body: z.string(),
-    username: z.string(),
+    account: UserAccountSchema,
     status: z.boolean(),
     created_at: z.string(), // want to roll this into id using Snowflake
     difficulty: z.string(),

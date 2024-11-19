@@ -10,9 +10,10 @@ export const usePostSearch = (params: URLSearchParams) => {
 
     // const base = new URL('./posts.json');
     // const url = `${base}${params.toString()}`;
-    // const request = new Request(url, {
-    //     method: "GET"
-    // });
+    const url = `localhost:3000/search?${params.toString()}`;
+    const request = new Request(url, {
+        method: "GET"
+    });
 
     // useEffect(() => {
     //     fetch(request, { signal })
@@ -27,5 +28,9 @@ export const usePostSearch = (params: URLSearchParams) => {
     //         abortController.abort();
     //     };
     // }, [request, signal]);
+
+    useEffect(() => {
+        console.log(request);
+    }, [params]);
     return posts;
 };
