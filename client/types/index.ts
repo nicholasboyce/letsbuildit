@@ -6,12 +6,12 @@ const TeamMemberSchema = z.object({
 });
 
 const ProjectPostSchema = z.object({
-    id: z.string(),
+    id: z.number(),
     title: z.string(),
     body: z.string(),
     username: z.string(),
     status: z.boolean(),
-    created_at: z.date(), // want to roll this into id using Snowflake
+    created_at: z.string(), // want to roll this into id using Snowflake
     difficulty: z.string(),
     language: z.string(),
     upvotes: z.number(),

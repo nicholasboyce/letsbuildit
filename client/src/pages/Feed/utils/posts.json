@@ -1,10 +1,10 @@
 [
     {
         "id": 1,
-        "title": "",
-        "body": "",
-        "username": "",
-        "status": "open",
+        "title": "Building a New Git",
+        "body": "Blah blah blah",
+        "username": "githead",
+        "status": true,
         "created_at": "timestamp",
         "difficulty": "novice",
         "language": "Javascript",
@@ -12,15 +12,41 @@
         "repo_link": "https://github.com/nicholasboyce/letsbuildit",
         "team_members": [
             {
-                "username": "",
+                "username": "mickey",
                 "manager": true
             },
             {
-                "username": "",
+                "username": "donald",
                 "manager": false
             },
             {
-                "username": "",
+                "username": "goofy",
+                "manager": false
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Building a New Git",
+        "body": "Blah blah blah",
+        "username": "githead",
+        "status": true,
+        "created_at": "timestamp",
+        "difficulty": "novice",
+        "language": "Javascript",
+        "upvotes": 12,
+        "repo_link": "https://github.com/nicholasboyce/letsbuildit",
+        "team_members": [
+            {
+                "username": "mickey",
+                "manager": true
+            },
+            {
+                "username": "donald",
+                "manager": false
+            },
+            {
+                "username": "goofy",
                 "manager": false
             }
         ]

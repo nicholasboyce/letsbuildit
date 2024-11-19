@@ -15,36 +15,6 @@ export const Feed = () => {
 
                 <output name="result">
                     <ul className="posts">
-                        <li className="post-item">
-                            <article className="post-info">
-                                <h2 className="post-title">Looking for a Hero</h2>
-                                <p className="body">Blah blah blah blah...</p>
-                                <div className="author-data">
-                                    <p className="author">Author: Mark Vain</p>
-                                    <p className="posttime">Posted At: 11 o'clock</p>
-                                </div>
-                                <div className="project-data">
-                                    <p className="timezone">EST</p>
-                                    <p className="language">Java</p>
-                                    <p className="status">Open</p>
-                                </div>
-                                <aside>
-                                    <h2>Team Members</h2>
-                                    <ul className="members">
-                                        <li className="member">Member Name</li>
-                                        <li className="member">Member Name</li>
-                                        <li className="member">Member Name</li>
-                                        <li className="member">Member Name</li>
-                                        <li className="member">Member Name</li>
-                                        <li className="member">Member Name</li>
-                                        <li className="member">Member Name</li>
-                                        <li className="member">Member Name</li>
-                                    </ul>
-                                </aside>
-                                <button className="like-button">Like</button>
-                                <button className="interested">Let's pair!</button>
-                            </article>
-                        </li>
                         {posts.map((post) => {
                             return (
                                 <li key={post.id} className="post-item">
@@ -56,7 +26,7 @@ export const Feed = () => {
                                             <p className="posttime">{post.created_at}</p>
                                         </div>
                                         <div className="project-data">
-                                            /** embed user data into post return data */
+                                            {/** embed user data into post return data */}
                                             <p className="language">{post.language}</p>
                                             <p className="difficulty">{post.difficulty}</p>
                                         </div>
@@ -65,11 +35,13 @@ export const Feed = () => {
                                             <ul className="members">
                                                 {post.team_members.map((member) => {
                                                     return (
-                                                        <li className="member">{member.username}</li>
+                                                        <li className="member" key={member.username}>{member.username}</li>
                                                     );
                                                 })}
                                             </ul>
                                         </aside>
+                                        <button className="like-button">Like</button>
+                                        <button className="interested">Let's pair!</button>
                                     </article>
                                 </li>
                             )
