@@ -22,8 +22,8 @@ export const Feed = () => {
                                         <h2 className="post-title">{post.title}</h2>
                                         <p className="body">{post.body}</p>
                                         <div className="author-data">
-                                            <p className="author">{post.username}</p>
-                                            <p className="posttime">{post.created_at}</p>
+                                            <p className="author">{post.account.username}</p>
+                                            <p className="posttime">{}</p>
                                         </div>
                                         <div className="project-data">
                                             {/** embed user data into post return data */}

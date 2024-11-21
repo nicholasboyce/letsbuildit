@@ -11,13 +11,13 @@ const UserAccountSchema = z.object({
 });
 
 const ProjectPostSchema = z.object({
-    id: z.number(),
+    id: z.string(),
     title: z.string(),
     body: z.string(),
     account: UserAccountSchema,
-    status: z.boolean(),
-    created_at: z.string(), // want to roll this into id using Snowflake
-    difficulty: z.string(),
+    open: z.boolean(),
+    // created_at: z.string(), // want to roll this into id using Snowflake
+    difficulty: z.number(), //change back to string, only number for compatibility with fake data
     language: z.string(),
     upvotes: z.number(),
     repo_link: z.string().url(),

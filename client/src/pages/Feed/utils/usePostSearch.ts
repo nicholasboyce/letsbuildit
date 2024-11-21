@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ProjectPost } from "../../../../types";
-import json from './posts.json';
+import json from './MOCK_DATA.json';
 
 export const usePostSearch = (params: URLSearchParams) => {
     const data : ProjectPost[] = json;
