@@ -1,5 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import { usePostSearch } from "./utils/usePostSearch";
+import { decodeTime } from "ulid";
 
 export const Feed = () => {
     
@@ -22,13 +23,14 @@ export const Feed = () => {
                                         <h2 className="post-title">{post.title}</h2>
                                         <p className="body">{post.body}</p>
                                         <div className="author-data">
-                                            <p className="author">{post.account.username}</p>
-                                            <p className="posttime">{}</p>
+                                            <p className="author">Author: {post.account.username}</p>
+                                            <p className="timezone">Timezone: {post.account.timezone}</p>
                                         </div>
                                         <div className="project-data">
-                                            {/** embed user data into post return data */}
-                                            <p className="language">{post.language}</p>
-                                            <p className="difficulty">{post.difficulty}</p>
+                                            <p className="posttime">Posted at: {`${decodeTime(post.id)}`}</p>
+                                            <p className="language">Language: {post.language}</p>
+                                            <p className="difficulty">Difficulty: {post.difficulty}</p>
+                                            <p className="repo"><a href={post.repo_link}>Github Repo</a></p>
                                         </div>
                                         <aside>
                                             <h2>Team Members</h2>

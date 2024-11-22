@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { usePostSearch } from '../Feed/utils/usePostSearch';
 import { FormEvent } from 'react';
 import { z } from 'zod';
-
+import { Post } from './components';
 
 export const SearchPage = () => {
 
@@ -77,33 +77,7 @@ export const SearchPage = () => {
                                 <ul className="posts">
                                     {posts.map((post) => {
                                         return (
-                                            <li key={post.id} className="post-item">
-                                                <article>
-                                                    <h2 className="post-title">{post.title}</h2>
-                                                    <p className="body">{post.body}</p>
-                                                    <div className="author-data">
-                                                        <p className="author">{post.account.username}</p>
-                                                        <p className="post-time">{post.created_at}</p>
-                                                    </div>
-                                                    <div className="project-data">
-                                                        <p className="timezone">{post.account.timezone}</p>
-                                                        <p className="language">{post.language}</p>
-                                                        <p className="difficulty">{post.difficulty}</p>
-                                                    </div>
-                                                    <aside>
-                                                        <h2>Team Members</h2>
-                                                        <ul className="members">
-                                                            {post.team_members.map((member) => {
-                                                                return (
-                                                                    <li className="member" key={member.username}>{member.username}</li>
-                                                                );
-                                                            })}
-                                                        </ul>
-                                                    </aside>
-                                                    <button className="like-button">Like</button>
-                                                    <button className="interested">Let's pair!</button>
-                                                </article>
-                                            </li>
+                                            <Post post={post} />
                                         )
                                     })}
                                 </ul>
