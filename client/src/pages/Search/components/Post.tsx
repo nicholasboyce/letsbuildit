@@ -1,5 +1,6 @@
 import { decodeTime } from "ulid";
 import { ProjectPost } from "../../../../types";
+import { FormEvent } from "react";
 
 
 interface PostProps {
@@ -8,6 +9,14 @@ interface PostProps {
 
 export const Post = ({ post } : PostProps) => {
     const date = new Date(decodeTime(post.id));
+
+    const sendLike = (e: FormEvent) => {
+        e.preventDefault();
+    };
+
+    const sendInterest = (e: FormEvent) => {
+        e.preventDefault();
+    };
 
     return (
         <li key={post.id} className="post-item">
@@ -34,8 +43,8 @@ export const Post = ({ post } : PostProps) => {
                         })}
                     </ul>
                 </aside>
-                <button className="like-button">Like</button>
-                <button className="interested">Let's pair!</button>
+                <button className="like-button" onClick={sendLike}>Like</button>
+                <button className="interested" onClick={sendInterest}>Let's pair!</button>
             </article>
         </li>
     );
