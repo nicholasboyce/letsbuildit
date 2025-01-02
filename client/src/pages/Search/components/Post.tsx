@@ -12,10 +12,25 @@ export const Post = ({ post } : PostProps) => {
 
     const sendLike = (e: FormEvent) => {
         e.preventDefault();
+        const button = e.currentTarget;
+        button.classList.toggle('clicked');
+        if (button.classList.contains('clicked')) {
+            button.textContent = 'Like';
+        } else {
+            button.textContent = 'Liked!';
+        }
+
     };
 
     const sendInterest = (e: FormEvent) => {
         e.preventDefault();
+        const button = e.currentTarget;
+        button.classList.toggle('clicked');
+        if (button.classList.contains('clicked')) {
+            button.textContent = 'Let\'s pair!';
+        } else {
+            button.textContent = 'Pair request sent!';
+        }
     };
 
     return (
