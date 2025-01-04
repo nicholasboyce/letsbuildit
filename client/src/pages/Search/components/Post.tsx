@@ -34,7 +34,7 @@ export const Post = ({ post } : PostProps) => {
     };
 
     return (
-        <li key={post.id} className="post-item">
+        <li key={post.id} className="post-item" dataPostId={post.id}>
             <article>
                 <h2 className="post-title">{post.title}</h2>
                 <p className="body">{post.body}</p>
