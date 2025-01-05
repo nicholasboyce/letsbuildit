@@ -1,6 +1,7 @@
 import { decodeTime } from "ulid";
 import { ProjectPost } from "../../../../types";
 import { FormEvent } from "react";
+import { useNavigate } from "react-router";
 
 
 interface PostProps {
@@ -9,6 +10,7 @@ interface PostProps {
 
 export const Post = ({ post } : PostProps) => {
     const date = new Date(decodeTime(post.id));
+    let nav = useNavigate();
 
     const sendLike = (e: FormEvent) => {
         e.preventDefault();
@@ -36,7 +38,7 @@ export const Post = ({ post } : PostProps) => {
     return (
         <li key={post.id} className="post-item" dataPostId={post.id}>
             <article>
-                <h2 className="post-title">{post.title}</h2>
+                <h2 className="post-title" onClick={() => nav(`/${post.id}`)}>{post.title}</h2>
                 <p className="body">{post.body}</p>
                 <div className="author-data">
                     <p className="author">Author: {post.account.username}</p>
