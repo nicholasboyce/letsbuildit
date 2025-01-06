@@ -10,7 +10,7 @@ interface PostProps {
 
 export const Post = ({ post } : PostProps) => {
     const date = new Date(decodeTime(post.id));
-    let nav = useNavigate();
+    const nav = useNavigate();
 
     const sendLike = (e: FormEvent) => {
         e.preventDefault();
