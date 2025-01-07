@@ -1,7 +1,7 @@
 import { decodeTime } from "ulid";
 import { ProjectPost } from "../../../../types";
 import { FormEvent } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 
 interface PostProps {
