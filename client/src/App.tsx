@@ -1,5 +1,5 @@
 import './App.css';
-import { Home, SearchPage, Feed } from './pages';
+import { Home, SearchPage, Feed, FullPost } from './pages';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
       <Route path='/' element={<Home />} />
       <Route path='/search' element={<SearchPage />} />
       <Route path='/feed' element={<Feed />} />
+      <Route path='/posts/:id' element={<FullPost />} />
     </Routes>
     </>
   )
