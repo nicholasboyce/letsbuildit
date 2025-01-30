@@ -38,7 +38,7 @@ export const Post = ({ post } : PostProps) => {
     return (
         <li key={post.id} className="post-item" dataPostId={post.id}>
             <article>
-                <h2 className="post-title" onClick={() => nav(`/${post.id}`)}>{post.title}</h2>
+                <h2 className="post-title" onClick={() => nav(`/posts/${post.id}`)}>{post.title}</h2>
                 <p className="body">{post.body}</p>
                 <div className="author-data">
                     <p className="author">Author: {post.account.username}</p>

@@ -1,5 +1,5 @@
 import './App.css';
-import { Home, SearchPage, Feed, FullPost } from './pages';
+import { Home, SearchPage, Feed, FullPost, UserRepos } from './pages';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -11,6 +11,7 @@ function App() {
       <Route path='/search' element={<SearchPage />} />
       <Route path='/feed' element={<Feed />} />
       <Route path='/posts/:id' element={<FullPost />} />
+      <Route path='/users/:name/repos' element={<UserRepos />} />
     </Routes>
     </>
   )
