@@ -1,10 +1,28 @@
 import { use } from "react";
+import { ProjectPost } from "../../../types";
 
-export const Repo = ({ resourcePromise }) => {
+interface Repo {
+    name: string
+    full_name: string
+    author: string
+    description: string
+    created_at: Date
+}
+
+// const RepoSchema = z.object({
+//     name: z.string(),
+//     author: z.string(),
+//     description: z.string(),
+    
+// });
+
+export const RepoList = ({ resourcePromise }) => {
     // const result = resource.result.read();
-    const data = use(resourcePromise);
+    const data : ProjectPost = use(resourcePromise);
 
     return (
-        data.map((repo) => <p>{repo.name}</p>)
+        <ul>
+            {data.map((repo) => <li key={repo.full_name}>{repo.name}</li>)}
+        </ul>
     );
 };

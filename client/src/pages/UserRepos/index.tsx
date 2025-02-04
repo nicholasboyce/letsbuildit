@@ -2,7 +2,7 @@
 
 import { useParams } from "react-router-dom";
 // import { exportJSONTest } from "../../utils/wrapPromise";
-import { Repo } from "./Repo";
+import { RepoList } from "./Repo";
 import { Suspense } from "react";
 
 export const UserRepos = () => {
@@ -16,7 +16,7 @@ export const UserRepos = () => {
         <div>
             <p>Hello {name} !</p>
             <Suspense fallback={<h1>Loading...</h1>}>
-                <Repo resourcePromise={dataPromise} />
+                <RepoList resourcePromise={dataPromise} />
             </Suspense>
             <p>Hey...</p>
         </div>
