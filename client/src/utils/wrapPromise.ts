@@ -1,7 +1,7 @@
 export const wrapPromise = (promise: Promise<any>) => {
     let status = "pending";
     let result = "";
-    let suspender = promise.then(
+    const suspender = promise.then(
       r => {
         status = "success";
         result = r;
