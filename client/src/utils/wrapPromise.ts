@@ -1,4 +1,4 @@
-export const wrapPromise = (promise: Promise<any>) => {
+const wrapPromise = (promise: Promise<any>) => {
     let status = "pending";
     let result = "";
     const suspender = promise.then(
@@ -23,5 +23,13 @@ export const wrapPromise = (promise: Promise<any>) => {
         return result;
       }
     };
+};
+
+const fetchJSON = () => fetch('https://jsonplaceholder.typicode.com/todos/1').then(response => response.json());
+
+export const exportJSONTest = () => {
+  return {
+    result: wrapPromise(fetchJSON())
+  }
 };
 

@@ -12,11 +12,7 @@ function App() {
       <Route path='/search' element={<SearchPage />} />
       <Route path='/feed' element={<Feed />} />
       <Route path='/posts/:id' element={<FullPost />} />
-      <Route path='/users/:name/repos' element={
-        <Suspense fallback={<h1>Loading...</h1>}>
-          <UserRepos />
-        </Suspense>
-        } />
+      <Route path='/users/:name/repos' element={<UserRepos />} />
     </Routes>
     </>
   )

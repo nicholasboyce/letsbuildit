@@ -1,17 +1,24 @@
+// 'use client';
+
 import { useParams } from "react-router-dom";
-import { wrapPromise } from "../../utils/wrapPromise";
+// import { exportJSONTest } from "../../utils/wrapPromise";
+import { Repo } from "./Repo";
+import { Suspense } from "react";
 
 export const UserRepos = () => {
     const { name } = useParams();
 
-    const repoResponse = fetch('https://jsonplaceholder.typicode.com/todos/1').then(response => response.json());
-    const repoData = wrapPromise(repoResponse);
+    const fetchJSON = () => fetch(`https://api.github.com/users/${name}/repos`).then(response => response.json());
+    const dataPromise = fetchJSON();
 
-    const repos = repoData.read();
     return (
         <>
         <div>
-            <p>Hello!</p>
+            <p>Hello {name} !</p>
+            <Suspense fallback={<h1>Loading...</h1>}>
+                <Repo resourcePromise={dataPromise} />
+            </Suspense>
+            <p>Hey...</p>
         </div>
         </>
     );
