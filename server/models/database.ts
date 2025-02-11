@@ -1,7 +1,7 @@
-import { GithubUserTable } from "./GithubUser";
+// import { GithubUserTable } from "./GithubUser";
 import { RCUserTable } from "./RCUser";
 
 export interface Database {
-    githubUser: GithubUserTable
+    // githubUser: GithubUserTable
     rc_user: RCUserTable
 }

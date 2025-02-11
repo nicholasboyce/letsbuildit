@@ -3,7 +3,7 @@ import passport from 'passport';
 import { authController } from '../controllers/auth';
 import config from '../utils/config';
 import crypto from 'node:crypto';
-import '../strategies/github-strategy';
+// import '../strategies/github-strategy';
 import '../strategies/recurse-strategy';
 import { z } from "zod";
 import { RCUserRepository } from '../repositories/RCUserRepository';
@@ -60,14 +60,14 @@ authRouter.get('/github/callback', async (request, response) => {
     }
 });
 
-authRouter.get('/github', passport.authenticate('github'));
-authRouter.get(
-    '/github/redirect', 
-    passport.authenticate('github', { keepSessionInfo: true }),
-    (_, response) => {
-        response.status(200).redirect('/');
-    }
-);
+// authRouter.get('/github', passport.authenticate('github'));
+// authRouter.get(
+//     '/github/redirect', 
+//     passport.authenticate('github', { keepSessionInfo: true }),
+//     (_, response) => {
+//         response.status(200).redirect('/');
+//     }
+// );
 authRouter.get('/status', authController.getUserStatus);
 
 export {

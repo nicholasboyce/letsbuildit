@@ -7,26 +7,12 @@ import { logger } from './utils/logger';
 import { middleware } from './utils/middleware';
 import { Router } from './router';
 import config from './utils/config';
+import { migrateToLatest } from './utils/migration';
 
 
 db.connection()
     .execute(async (db) => {
-        await db.schema.createTable('githubUser')
-            .ifNotExists()
-            .addColumn('id', 'uuid', (col) => col.primaryKey())
-            .addColumn('username', 'varchar(50)', (col) => col.notNull().unique())
-            .addColumn('githubID', 'varchar(50)', (col) => col.notNull().unique())
-            .execute();
-
-        await db.schema.createTable('rc_user')
-            .ifNotExists()
-            .addColumn('id', 'uuid', (col) => col.primaryKey())
-            .addColumn('name', 'varchar(50)', (col) => col.notNull().unique())
-            .addColumn('rcID', 'varchar(50)', (col) => col.notNull().unique())
-            .addColumn('rcRefreshToken', 'varchar(50)', (col) => col.notNull().unique())
-            .addColumn('githubID', 'varchar(50)', (col) => col.unique())
-            .addColumn('githubRefreshToken', 'varchar(50)', (col) => col.unique())
-            .execute();
+        await migrateToLatest();
     })
     .then(() => {
         logger.info(`Connected to Postgres database`);
