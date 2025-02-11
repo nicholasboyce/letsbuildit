@@ -10,18 +10,25 @@ import e from 'express-serve-static-core';
 
 const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, accessToken: string, refreshToken: string, profile: any, done: VerifyCallback) => {
     // logger.info(`Access token: ${accessToken}; Refresh token: ${refreshToken}`);
+    const userResponse = await fetch('https://www.recurse.com/api/v1/profiles/me', {
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
+    const userProfile = await userResponse.json();
     let findUser;
     try {
-        findUser = await RCUserRepository.findUserByRCId(profile.id);
+        findUser = await RCUserRepository.findUserByRCId(userProfile.id);
     } catch (error) {
         return done(error, false);
     }
     try {
         if (!findUser) {
+            console.log("Tokens:", accessToken, refreshToken, userProfile);
             const newUser : NewRCUser = {
                 id: crypto.randomUUID(),
-                username: profile.username || '',
-                rcID: profile.id,
+                name: userProfile.name,
+                rcID: userProfile.id,
                 rcRefreshToken: refreshToken
             };
             try {
@@ -33,7 +40,8 @@ const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, access
             }
         }
         req.session.recurseToken = accessToken;
-        return done(null, findUser);
+        const updatedUser = await RCUserRepository.updateRCRefreshToken(findUser.id, refreshToken);
+        return done(null, updatedUser);
     } catch (error) {
         logger.error(error);
         return done(error, false);

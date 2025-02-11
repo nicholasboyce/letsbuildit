@@ -3,5 +3,5 @@ import { RCUserTable } from "./RCUser";
 
 export interface Database {
     githubUser: GithubUserTable
-    rcUser: RCUserTable
+    rc_user: RCUserTable
 }

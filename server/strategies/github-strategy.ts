@@ -4,9 +4,11 @@ import crypto from 'node:crypto';
 import config from '../utils/config';
 import { logger } from '../utils/logger';
 import { NewRCUser } from '../models/RCUser';
+import { NewGithubUser } from '../models/GithubUser';
 import { RCUserRepository } from '../repositories/RCUserRepository';
 import { VerifyCallback, VerifyFunctionWithRequest } from 'passport-oauth2';
 import e from 'express-serve-static-core';
+import { GithubUserRepository } from '../repositories/GithubUserRepository';
 
 const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, accessToken: string, refreshToken: string, profile: Profile, done: VerifyCallback) => {
     // logger.info(`Access token: ${accessToken}; Refresh token: ${refreshToken}`);

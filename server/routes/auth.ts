@@ -36,12 +36,26 @@ authRouter.get('/github/callback', async (request, response) => {
         params.append('client_id', config.GITHUB_CLIENT_ID);
         params.append('client_secret', config.GITHUB_CLIENT_SECRET);
         params.append('code', code);
-        const tokenReponse = await fetch(`https://github.com/login/oauth/access_token?${params.toString()}`, {
-            method: "POST"
+        const tokenResponse = await fetch(`https://github.com/login/oauth/access_token?${params.toString()}`, {
+            method: "POST",
+            headers: {
+                Accept: "application/json"
+            }
         });
-        const tokens = await tokenReponse.json();
+        // console.log(tokenResponse);
+        const tokens = await tokenResponse.json().catch((e) => console.log(e));
+        console.log(tokens);
         request.session.githubToken = tokens.access_token;
-        await RCUserRepository.updateGithubRefreshToken(request.user?.id as crypto.UUID, tokens.refresh_token);
+        const userResponse = await fetch('https://api.github.com/user', {
+            headers: {
+                Authorization: `Bearer ${tokens.access_token}`
+            }
+        });
+        const userInfo = await userResponse.json();
+        const savedUser = await RCUserRepository.updateGithubRefreshToken(request.user?.id as crypto.UUID, tokens.refresh_token);
+        if (!savedUser.githubID) {
+            await RCUserRepository.updateUser(request.user?.id as crypto.UUID, {githubID: userInfo.id});
+        }
         return response.status(200).redirect('/posts');
     }
 });

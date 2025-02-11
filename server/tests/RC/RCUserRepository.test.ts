@@ -11,9 +11,11 @@ describe('RCUser Repository', () => {
         await db.schema.createTable('rcUser')
             .ifNotExists()
             .addColumn('id', 'uuid', (col) => col.primaryKey())
-            .addColumn('username', 'varchar(50)', (col) => col.notNull().unique())
+            .addColumn('name', 'varchar(50)', (col) => col.notNull().unique())
             .addColumn('rcID', 'varchar(50)', (col) => col.notNull().unique())
-            .addColumn('refreshToken', 'varchar(50)', (col) => col.notNull().unique())
+            .addColumn('rcRefreshToken', 'varchar(50)', (col) => col.notNull().unique())
+            .addColumn('githubID', 'varchar(50)', (col) => col.unique())
+            .addColumn('githubRefreshToken', 'varchar(50)', (col) => col.unique())
             .execute();
         console.log('Starting Repo Test');
     });
@@ -25,14 +27,14 @@ describe('RCUser Repository', () => {
     test('successfully creates new user', async () => {
         const newUser : NewRCUser = {
             id: crypto.randomUUID(),
-            username: 'sarah2',
+            name: 'sarah2',
             rcID: '1234',
-            refreshToken: 'token'
+            rcRefreshToken: 'token'
         };
 
         const user = await createUser(newUser);
 
-        assert.strictEqual(newUser.username, user.username);
+        assert.strictEqual(newUser.name, user.name);
         assert.strictEqual(newUser.rcID, user.rcID);
 
         const result = await findUserById(user.id);
@@ -43,15 +45,15 @@ describe('RCUser Repository', () => {
     test('successfully updates existing user', async () => {
         const newUser : NewRCUser = {
             id: crypto.randomUUID(),
-            username: 'sarah2',
+            name: 'sarah2',
             rcID: '1234',
-            refreshToken: 'token'
+            rcRefreshToken: 'token'
         };
 
         const user = await createUser(newUser);
-        const updatedUser = await updateUser(user.id, { username: 'sarahBEARA' });
+        const updatedUser = await updateUser(user.id, { name: 'sarahBEARA' });
 
-        assert.strictEqual(updatedUser.username, 'sarahBEARA');
+        assert.strictEqual(updatedUser.name, 'sarahBEARA');
 
         const storedUser = await findUserById(user.id);
         assert.deepStrictEqual(storedUser, updatedUser);

@@ -11,7 +11,7 @@ import { UUID } from 'crypto';
 
 export interface RCUserTable {
     id: Generated<UUID>
-    username: string
+    name: string
     rcID: string
     rcRefreshToken: string
     githubRefreshToken?: string
