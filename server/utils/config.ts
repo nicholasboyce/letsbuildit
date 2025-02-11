@@ -12,6 +12,9 @@ const SESSION_SECRET = process.env.SESSION_SECRET || 'iloveyou';
 const POSTGRESDB_PORT = process.env.NODE_ENV === 'test' ? 5434 : Number(process.env.POSTGRESDB_PORT);
 const POSTGRESDB_PASSWORD = process.env.NODE_ENV === 'test' ? 'password' : process.env.POSTGRESDB_PASSWORD;
 const APP_HOST = process.env.APP_HOST;
+const RECURSE_CLIENT_ID = process.env.RECURSE_CLIENT_ID || 'rc_test_id';
+const RECURSE_CLIENT_SECRET = process.env.RECURSE_CLIENT_SECRET || 'rc_test_secret';
+
 
 export default {
     PORT,
@@ -24,5 +27,7 @@ export default {
     POSTGRESDB_PORT,
     POSTGRESDB_PASSWORD,
     SESSION_SECRET,
-    APP_HOST
+    APP_HOST,
+    RECURSE_CLIENT_ID,
+    RECURSE_CLIENT_SECRET
 }
