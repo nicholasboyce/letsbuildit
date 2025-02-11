@@ -1,6 +1,6 @@
 import { describe, test } from 'node:test';
 import assert from 'node:assert';
-import { NewGithubUser } from '../models/GithubUser';
+import { NewGithubUser } from '../../models/GithubUser';
 
 
 describe('GithubUser object', () => {

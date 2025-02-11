@@ -1,8 +1,8 @@
 import { describe, test, before, after, beforeEach } from 'node:test';
-import { db } from '../database';
+import { db } from '../../database';
 import assert from 'node:assert';
-import { NewGithubUser } from '../models/GithubUser';
-import { GithubUserRepository } from '../repositories/GithubUserRepository';
+import { NewGithubUser } from '../../models/GithubUser';
+import { GithubUserRepository } from '../../repositories/GithubUserRepository';
 import crypto from 'node:crypto';
 const { createUser, findUserById, deleteAll, updateUser } = GithubUserRepository;
 

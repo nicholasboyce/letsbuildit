@@ -6,14 +6,15 @@ declare global {
         interface User {
             id?: UUID
             githubID?: string
+            rcID?: string
         }
     }
 }
 
 declare module 'express-session' {
     interface SessionData {
-        refreshToken?: string
-        accessToken?: string
+        recurseToken?: string
+        githubToken?: string
         visited?: boolean
     }
 }

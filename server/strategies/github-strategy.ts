@@ -25,13 +25,13 @@ const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, access
             };
             try {
                 const savedUser = await GithubUserRepository.createUser(newUser);
-                req.session.accessToken = accessToken;
+                req.session.githubToken = accessToken;
                 return done(null, savedUser);
             } catch (error) {
                 return done(error, false);
             }
         }
-        req.session.accessToken = accessToken;
+        req.session.githubToken = accessToken;
         return done(null, findUser);
     } catch (error) {
         logger.error(error);

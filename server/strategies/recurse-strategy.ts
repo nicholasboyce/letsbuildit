@@ -4,6 +4,8 @@ import crypto from 'node:crypto';
 import config from '../utils/config';
 import { logger } from '../utils/logger';
 import { VerifyCallback, VerifyFunctionWithRequest } from 'passport-oauth2';
+import { NewRCUser } from "../models/RCUser";
+import { RCUserRepository } from "../repositories/RCUserRepository";
 import e from 'express-serve-static-core';
 
 const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, accessToken: string, refreshToken: string, profile: any, done: VerifyCallback) => {
@@ -19,17 +21,18 @@ const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, access
             const newUser : NewRCUser = {
                 id: crypto.randomUUID(),
                 username: profile.username || '',
-                recurseID: profile.id,
+                rcID: profile.id,
+                refreshToken: refreshToken
             };
             try {
                 const savedUser = await RCUserRepository.createUser(newUser);
-                req.session.accessToken = accessToken;
+                req.session.recurseToken = accessToken;
                 return done(null, savedUser);
             } catch (error) {
                 return done(error, false);
             }
         }
-        req.session.accessToken = accessToken;
+        req.session.recurseToken = accessToken;
         return done(null, findUser);
     } catch (error) {
         logger.error(error);
@@ -38,7 +41,7 @@ const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, access
 };
 
 passport.serializeUser((user, done) => {
-    return done(null, user.recurseID);
+    return done(null, user.rcID);
 });
 
 passport.deserializeUser(async (id: any, done) => {
@@ -56,7 +59,7 @@ passport.use('recurse', new OAuth2Strategy({
         tokenURL: 'https://www.recurse.com/oauth/token',
         clientID: config.RECURSE_CLIENT_ID,
         clientSecret: config.RECURSE_CLIENT_SECRET,
-        callbackURL: `http://${config.APP_HOST}:${config.PORT}/api/auth/github/redirect`,
+        callbackURL: `http://${config.APP_HOST}:${config.PORT}/api/auth/recurse/redirect`,
         passReqToCallback: true
     },
     verifyFunction

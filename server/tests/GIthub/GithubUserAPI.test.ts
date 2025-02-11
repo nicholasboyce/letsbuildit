@@ -1,11 +1,11 @@
 import { describe, test, before, after, beforeEach } from 'node:test';
-import { db } from '../database';
+import { db } from '../../database';
 import assert from 'node:assert';
 import supertest from 'supertest';
-import app from '../app';
-import { GithubUserRepository } from '../repositories/GithubUserRepository';
-import { usersService } from '../services/users';
-import { NewGithubUser } from '../models/GithubUser';
+import app from '../../app';
+import { GithubUserRepository } from '../../repositories/GithubUserRepository';
+import { usersService } from '../../services/users';
+import { NewGithubUser } from '../../models/GithubUser';
 
 const browser = supertest.agent(app);
 
