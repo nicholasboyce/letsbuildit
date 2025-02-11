@@ -13,7 +13,9 @@ export interface RCUserTable {
     id: Generated<UUID>
     username: string
     rcID: string
-    refreshToken: string
+    rcRefreshToken: string
+    githubRefreshToken?: string
+    githubID?: string
 };
 
 export type RCUser = Selectable<RCUserTable>;

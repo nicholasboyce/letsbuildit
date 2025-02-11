@@ -3,8 +3,8 @@ import { Strategy, Profile } from 'passport-github2';
 import crypto from 'node:crypto';
 import config from '../utils/config';
 import { logger } from '../utils/logger';
-import { NewGithubUser } from '../models/GithubUser';
-import { GithubUserRepository } from '../repositories/GithubUserRepository';
+import { NewRCUser } from '../models/RCUser';
+import { RCUserRepository } from '../repositories/RCUserRepository';
 import { VerifyCallback, VerifyFunctionWithRequest } from 'passport-oauth2';
 import e from 'express-serve-static-core';
 
@@ -12,7 +12,7 @@ const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, access
     // logger.info(`Access token: ${accessToken}; Refresh token: ${refreshToken}`);
     let findUser;
     try {
-        findUser = await GithubUserRepository.findUserByGithubId(profile.id);
+        findUser = await RCUserRepository.findUserByGithubId(profile.id);
     } catch (error) {
         return done(error, false);
     }

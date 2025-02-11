@@ -22,7 +22,7 @@ const verifyFunction : VerifyFunctionWithRequest = async (req: e.Request, access
                 id: crypto.randomUUID(),
                 username: profile.username || '',
                 rcID: profile.id,
-                refreshToken: refreshToken
+                rcRefreshToken: refreshToken
             };
             try {
                 const savedUser = await RCUserRepository.createUser(newUser);

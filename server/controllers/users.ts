@@ -11,6 +11,9 @@ const userResponseSchema = z
 
 interface userResponse extends z.infer<typeof userResponseSchema>{};
 
+const getCurrentUser : RequestHandler = async (request, response) => {
+    const currentUsername = request.user;
+};
 
 const getUser : RequestHandler = async (request, response) => {
     const username = request.params.user;
@@ -25,5 +28,6 @@ const getUser : RequestHandler = async (request, response) => {
 
 
 export const usersController = {
-    getUser
+    getUser,
+    getCurrentUser
 };

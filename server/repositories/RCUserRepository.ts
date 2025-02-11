@@ -39,6 +39,15 @@ const findUserByRCId = async (id: string) : Promise<RCUser | undefined> => {
         .executeTakeFirst();
 };
 
+/** Searches database for GithubUser by Github ID and returns the user or undefined if not found. */
+const findUserByGithubId = async (id: string) : Promise<RCUser | undefined> => {
+    return await db.selectFrom('rcUser')
+        .where('githubID', '=', id)
+        .selectAll()
+        .$assertType<RCUser>()
+        .executeTakeFirst();
+};
+
 /** Searches database for RCUser by username and returns the user or undefined if not found. */
 const findUserByUsername = async (username: string) : Promise<RCUser | undefined> => {
     return await db.selectFrom('rcUser')
@@ -64,12 +73,33 @@ const updateUser = async (id: UUID, user: UpdateRCUser) : Promise<RCUser> => {
         .executeTakeFirstOrThrow();
 };
 
+const updateRCRefreshToken = async (id: UUID, token: string) : Promise<RCUser> => {
+    return await db.updateTable('rcUser')
+        .set({rcRefreshToken: token})
+        .where('id', '=', id)
+        .returningAll()
+        .$assertType<RCUser>()
+        .executeTakeFirstOrThrow();
+};
+
+const updateGithubRefreshToken = async (id: UUID, token: string) : Promise<RCUser> => {
+    return await db.updateTable('rcUser')
+        .set({githubRefreshToken: token})
+        .where('id', '=', id)
+        .returningAll()
+        .$assertType<RCUser>()
+        .executeTakeFirstOrThrow();
+};
+
 export const RCUserRepository = {
     createRCUserTable,
     createUser,
     findUserByRCId,
     findUserById,
+    findUserByGithubId,
     findUserByUsername,
     deleteAll,
-    updateUser
+    updateUser,
+    updateGithubRefreshToken,
+    updateRCRefreshToken
 };
