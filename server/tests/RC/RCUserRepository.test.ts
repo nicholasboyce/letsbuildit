@@ -8,7 +8,7 @@ const { createUser, findUserById, deleteAll, updateUser } = RCUserRepository;
 
 describe('RCUser Repository', () => {
     before(async () => {
-        await db.schema.createTable('rcUser')
+        await db.schema.createTable('rc_user')
             .ifNotExists()
             .addColumn('id', 'uuid', (col) => col.primaryKey())
             .addColumn('name', 'varchar(50)', (col) => col.notNull().unique())
@@ -60,6 +60,6 @@ describe('RCUser Repository', () => {
     });
 
     after(async () => {
-        await db.schema.dropTable('githubUser').execute();
+        await db.schema.dropTable('rc_user').execute();
     });
 });

@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import './App.css';
 import { Home, SearchPage, Feed, FullPost, UserRepos } from './pages';
 import { Route, Routes, Outlet } from 'react-router-dom';
@@ -13,8 +12,8 @@ function App() {
         <Route path='posts'>
           <Route index element={<Feed/>} />
           <Route path='me' element={<p>My page!</p>}/>
-          <Route path=':name' element={<p>Someone else's page!</p>} />
-          <Route path=':name/:post' element={<p>The specific post of someone else!</p>} />
+          <Route path=':id' element={<p>Someone else's page!</p>} />
+          <Route path=':id/:post' element={<p>The specific post of someone else!</p>} />
         </Route>
         <Route path='*' element={<h1>Sorry! You're Lost...</h1>} />
       </Route>
