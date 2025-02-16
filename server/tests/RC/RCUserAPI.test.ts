@@ -6,6 +6,7 @@ import app from '../../app';
 import { RCUserRepository } from '../../repositories/RCUserRepository';
 import { NewRCUser } from '../../models/RCUser';
 import { z } from 'zod';
+import { MockAgent, setGlobalDispatcher } from 'undici';
 
 const browser = supertest.agent(app);
 
