@@ -16,6 +16,7 @@ describe('RCUser Repository', () => {
             .addColumn('rcRefreshToken', 'varchar(50)', (col) => col.notNull().unique())
             .addColumn('githubID', 'varchar(50)', (col) => col.unique())
             .addColumn('githubRefreshToken', 'varchar(50)', (col) => col.unique())
+            .addColumn('githubName', 'varchar(50)', (col) => col.unique())
             .execute();
         console.log('Starting Repo Test');
     });

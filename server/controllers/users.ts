@@ -29,8 +29,13 @@ interface userPostResponse extends z.infer<typeof userPostResponseSchema>{};
 
 const dbResponseSchema = z
     .object({
-        username: z.string(),
-        githubID: z.string()
+        id: z.string(),
+        name: z.string(),
+        rcID: z.string(),
+        rcRefreshToken: z.string(),
+        githubRefreshToken: z.string(),
+        githubID: z.string(),
+        githubName: z.string()
     })
     .required();
 
@@ -41,6 +46,7 @@ const getCurrentUser : RequestHandler = async (request, response) => {
 };
 
 const getUser : RequestHandler = async (request, response) => {
+    // if (!request.user) return response.sendStatus(404); // only authenticated users allowed to use api
     const id = request.params.user;
     const user = await usersService.getUser(id);
     if (!user) {
@@ -50,8 +56,8 @@ const getUser : RequestHandler = async (request, response) => {
     if (!valid.success) {
         return response.sendStatus(404);
     }
-    const rcResponse = await recurse.getUserInfo(user.rcID, request.session.recurseToken);
-    const ghResponse = await github.getUserPosts(user.githubName, request.session.githubToken);
+    const rcResponse = await recurse.getUserInfo(valid.data.rcID, request.session.recurseToken);
+    const ghResponse = await github.getUserPosts(valid.data.githubName, request.session.githubToken);
 
     if (rcResponse.success && ghResponse.success) {
         const userInfoRaw = {
