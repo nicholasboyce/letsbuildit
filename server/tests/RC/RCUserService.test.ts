@@ -2,7 +2,7 @@ import { describe, test, before, after, beforeEach } from 'node:test';
 import { db } from '../../database';
 import assert from 'node:assert';
 import { RCUserRepository } from '../../repositories/RCUserRepository';
-import { NewRCUser } from '../../models/RCUser';
+import { NewRCUser, RCUser } from '../../models/RCUser';
 import { z } from 'zod';
 import { MockAgent, setGlobalDispatcher } from 'undici';
 import { rcProfileResponse } from '../../utils/recurse';
@@ -60,7 +60,7 @@ describe('Service layer', () => {
             .addColumn('githubRefreshToken', 'varchar(50)', (col) => col.unique())
             .addColumn('githubName', 'varchar(50)', (col) => col.unique())
             .execute();
-        console.log('Starting API Test');
+        console.log('Starting Service Layer Test');
     });
 
     beforeEach(async () => {
@@ -173,6 +173,49 @@ describe('Service layer', () => {
                 .replyWithError(new Error('Not found'));
 
             const userData = await usersService.getUser(newUser.rcID, 'rc', 'github'); //tokens do not matter, API calls being mocked
+            assert.strictEqual(userData, null);
+            assert(!userPostResponseSchema.safeParse(userData).success);
+        });
+
+        test('returns up to 30 most recent public repositories for current user', async () => {
+            agent
+                .get(`https://www.recurse.com`)
+                .intercept({
+                    path: `/api/v1/profiles/me`,
+                    method: 'GET'
+                })
+                .reply(200, sarahRCData);
+
+            agent
+                .get('https://api.github.com')
+                .intercept({
+                    path: `/users/${newUser.githubName}/repos`,
+                    method: 'GET'
+                })
+                .reply(200, sarahGHData);
+        
+            const userData = await usersService.getCurrentUser(newUser as RCUser, 'rc', 'github'); //tokens do not matter, API calls being mocked
+            assert(userPostResponseSchema.safeParse(userData).success);
+        });
+
+        test('fails gracefully if current user fetch request fails for either service', async () => {
+            agent
+                .get(`https://www.recurse.com`)
+                .intercept({
+                    path: `/api/v1/profiles/me`,
+                    method: 'GET'
+                })
+                .replyWithError(new Error('Not found'));
+
+            agent
+                .get('https://api.github.com')
+                .intercept({
+                    path: `/users/${newUser.githubName}/repos`,
+                    method: 'GET'
+                })
+                .replyWithError(new Error('Not found'));
+        
+            const userData = await usersService.getCurrentUser(newUser as RCUser, 'rc', 'github'); //tokens do not matter, API calls being mocked
             assert.strictEqual(userData, null);
             assert(!userPostResponseSchema.safeParse(userData).success);
         });

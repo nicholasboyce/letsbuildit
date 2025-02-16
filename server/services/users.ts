@@ -4,6 +4,7 @@ import { z } from "zod";
 import { RCUserRepository } from "../repositories/RCUserRepository";
 import { recurse } from "../utils/recurse";
 import { github } from "../utils/github";
+import { RCUser } from "../models/RCUser";
 
 const dbResponseSchema = z
     .object({
@@ -69,17 +70,30 @@ const getUser = async (id: string, recurseToken: string | undefined, githubToken
     return null;
 };
 
-// const createUser = async (user : NewGithubUser) => {
-//     user.id = crypto.randomUUID();
-//     try {
-//         const savedUser = await GithubUserRepository.createUser(user);
-//         return savedUser;
-//     } catch (error) {
-//         return null;
-//     }
-// };
+const getCurrentUser = async (savedUser: RCUser, recurseToken: string | undefined, githubToken: string | undefined) => {
+    const valid = dbResponseSchema.safeParse(savedUser);
+    if (!valid.success) {
+        return null;
+    }
+    const user = valid.data;
+    const rcResponse = await recurse.getCurrentUserInfo(recurseToken);
+    const ghResponse = await github.getUserPosts(user.githubName, githubToken);
+
+    if (rcResponse.success && ghResponse.success) {
+        const userInfoRaw = {
+            user: rcResponse.data,
+            posts: ghResponse.data
+        };
+        const userInfo = userPostResponseSchema.safeParse(userInfoRaw);
+        if (userInfo.success) {
+            return userInfo.data;
+        }
+        return null;
+    }
+    return null;
+};
 
 export const usersService = {
     getUser,
-    // createUser
+    getCurrentUser
 };
