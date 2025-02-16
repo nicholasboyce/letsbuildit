@@ -1,15 +1,12 @@
 import { describe, test, before, after, beforeEach } from 'node:test';
 import { db } from '../../database';
 import assert, { strictEqual } from 'node:assert';
-import supertest from 'supertest';
-import app from '../../app';
 import { RCUserRepository } from '../../repositories/RCUserRepository';
 import { NewRCUser } from '../../models/RCUser';
 import { z } from 'zod';
 import { MockAgent, setGlobalDispatcher } from 'undici';
 import { rcProfileResponse } from '../../utils/recurse';
-
-const browser = supertest.agent(app);
+import { usersService } from '../../services/users';
 
 const userPostResponseSchema = z.object({
     user: z.object({
@@ -24,8 +21,8 @@ const userPostResponseSchema = z.object({
             name: z.string(),
             full_name: z.string(),
             description: z.string(),
-            created_at: z.coerce.date(),
-            updated_at: z.coerce.date(),
+            created_at: z.date(),
+            updated_at: z.date(),
             main_language: z.string().nullable(),
             languages: z.array(z.string().nullable())
         })
@@ -51,7 +48,7 @@ const sarahGHData = [{
     languages: ["Python"]
 }];
 
-describe('API', () => {
+describe('Service layer', () => {
     before(async () => {
         await db.schema.createTable('rc_user')
             .ifNotExists()
@@ -110,13 +107,8 @@ describe('API', () => {
                     method: 'GET'
                 })
                 .reply(200, sarahGHData);
-
-            const response = await browser
-                .get(`/api/users/${newUser.rcID}`)
-                .expect(200)
-                .expect('Content-Type', /application\/json/);
-
-            const userData = response.body;
+        
+            const userData = await usersService.getUser(newUser.rcID, 'rc', 'github'); //tokens do not matter, API calls being mocked
             assert(userPostResponseSchema.safeParse(userData).success);
         });
 
