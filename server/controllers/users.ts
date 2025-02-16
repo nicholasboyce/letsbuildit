@@ -1,76 +1,15 @@
 import { RequestHandler } from "express-serve-static-core";
 import { usersService } from "../services/users";
-import { z } from "zod";
-import { recurse } from "../utils/recurse";
-import { github } from "../utils/github";
 
-const userPostResponseSchema = z.object({
-    user: z.object({
-        zulip_id: z.number(),
-        image_path: z.string().url(),
-        name: z.string(),
-        pronouns: z.string()
-    }),
-    posts: z.array(
-        z.object({
-            html_url: z.string().url(),
-            name: z.string(),
-            full_name: z.string(),
-            description: z.string(),
-            created_at: z.date(),
-            updated_at: z.date(),
-            main_language: z.string(),
-            languages: z.array(z.string())
-        })
-    )
-});
-
-interface userPostResponse extends z.infer<typeof userPostResponseSchema>{};
-
-const dbResponseSchema = z
-    .object({
-        id: z.string(),
-        name: z.string(),
-        rcID: z.string(),
-        rcRefreshToken: z.string(),
-        githubRefreshToken: z.string(),
-        githubID: z.string(),
-        githubName: z.string()
-    })
-    .required();
-
-interface dbResponse extends z.infer<typeof dbResponseSchema>{};
 
 const getCurrentUser : RequestHandler = async (request, response) => {
     const currentUsername = request.user;
 };
 
 const getUser : RequestHandler = async (request, response) => {
-    // if (!request.user) return response.sendStatus(404); // only authenticated users allowed to use api
     const id = request.params.user;
-    const user = await usersService.getUser(id);
-    if (!user) {
-        return response.sendStatus(404);
-    }
-    const valid = dbResponseSchema.safeParse(user);
-    if (!valid.success) {
-        return response.sendStatus(404);
-    }
-    const rcResponse = await recurse.getUserInfo(valid.data.rcID, request.session.recurseToken);
-    const ghResponse = await github.getUserPosts(valid.data.githubName, request.session.githubToken);
-
-    if (rcResponse.success && ghResponse.success) {
-        const userInfoRaw = {
-            user: rcResponse.data,
-            posts: ghResponse.data
-        };
-        const userInfo = userPostResponseSchema.safeParse(userInfoRaw);
-        if (userInfo.success) {
-            return response.json(userInfo.data);
-        }
-        return response.sendStatus(404);
-    }
-    return response.sendStatus(404);
+    const user = await usersService.getUser(id, request.session.recurseToken, request.session.githubToken);
+    user ? response.json(user) : response.sendStatus(404);
 };
 
 export const usersController = {

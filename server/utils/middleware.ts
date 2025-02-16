@@ -10,6 +10,14 @@ const requestLogger : RequestHandler = (request, response, next) => {
     next()
 };
 
+const authCheck : RequestHandler = (request, response, next) => {
+    if (!request.user) {
+        return response.sendStatus(404);
+    }
+    next();
+}
+
 export const middleware = {
-    requestLogger
+    requestLogger,
+    authCheck
 };
