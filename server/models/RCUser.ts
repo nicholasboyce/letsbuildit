@@ -16,6 +16,7 @@ export interface RCUserTable {
     rcRefreshToken: string
     githubRefreshToken?: string
     githubID?: string
+    githubName?: string
 };
 
 export type RCUser = Selectable<RCUserTable>;

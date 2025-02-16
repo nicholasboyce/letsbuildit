@@ -54,7 +54,10 @@ authRouter.get('/github/callback', async (request, response) => {
         const userInfo = await userResponse.json();
         const savedUser = await RCUserRepository.updateGithubRefreshToken(request.user?.id as crypto.UUID, tokens.refresh_token);
         if (!savedUser.githubID) {
-            await RCUserRepository.updateUser(request.user?.id as crypto.UUID, {githubID: userInfo.id});
+            await RCUserRepository.updateUser(request.user?.id as crypto.UUID, {
+                githubID: userInfo.id,
+                githubName: userInfo.login
+            });
         }
         return response.status(200).redirect('/posts');
     }

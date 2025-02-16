@@ -2,6 +2,7 @@ import { RequestHandler } from "express-serve-static-core";
 import { usersService } from "../services/users";
 import { z } from "zod";
 import { recurse } from "../utils/recurse";
+import { github } from "../utils/github";
 
 const userPostResponseSchema = z.object({
     user: z.object({
@@ -35,19 +36,6 @@ const dbResponseSchema = z
 
 interface dbResponse extends z.infer<typeof dbResponseSchema>{};
 
-const ghResponseSchema = z.object({
-    html_url: z.string().url(),
-    name: z.string(),
-    full_name: z.string(),
-    description: z.string(),
-    created_at: z.date(),
-    updated_at: z.date(),
-    main_language: z.string(),
-    languages: z.array(z.string())
-}).array();
-
-interface ghResponse extends z.infer<typeof ghResponseSchema>{};
-
 const getCurrentUser : RequestHandler = async (request, response) => {
     const currentUsername = request.user;
 };
@@ -63,7 +51,7 @@ const getUser : RequestHandler = async (request, response) => {
         return response.sendStatus(404);
     }
     const rcResponse = await recurse.getUserInfo(user.rcID, request.session.recurseToken);
-    const ghResponse = await github.getUserPosts(user.githubID, request.session.githubToken);
+    const ghResponse = await github.getUserPosts(user.githubName, request.session.githubToken);
 
     if (rcResponse.success && ghResponse.success) {
         const userInfoRaw = {
