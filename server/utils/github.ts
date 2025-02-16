@@ -20,17 +20,23 @@ const getUserPosts = async (name: string | undefined, accessToken: string | unde
             data: null
         }
     }
-    const response = await fetch(`https://api.github.com/users/${name}/repos`, {
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-            Accept: 'application/vnd.github+json'
+    try {
+        const response = await fetch(`https://api.github.com/users/${name}/repos`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                Accept: 'application/vnd.github+json'
+            }
+        });
+        const rawData = await response.json();
+        const posts = ghResponseSchema.safeParse(rawData);
+        return posts;     
+    } catch (error) {
+        return {
+            success: false,
+            error,
+            data: null
         }
-    });
-    const rawData = await response.json();
-    // console.log(rawData);
-    const posts = ghResponseSchema.safeParse(rawData);
-    // console.log(posts.success);
-    return posts;
+    }
 };
 
 export const github = {

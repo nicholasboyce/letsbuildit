@@ -17,16 +17,22 @@ const getUserInfo = async (id: string, accessToken: string | undefined) => {
     //         data: null
     //     }
     // }
-    const userResponse = await fetch(`https://www.recurse.com/api/v1/profiles/${id}`, {
-        headers: {
-            Authorization: `Bearer ${accessToken}`
+    try {
+        const userResponse = await fetch(`https://www.recurse.com/api/v1/profiles/${id}`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        });
+        const userProfile = await userResponse.json();
+        const userInfo = rcProfileResponseSchema.safeParse(userProfile);
+        return userInfo;
+    } catch (error) {
+        return {
+            success: false,
+            error,
+            data: null
         }
-    });
-    const userProfile = await userResponse.json();
-    // console.log(userProfile);
-    const userInfo = rcProfileResponseSchema.safeParse(userProfile);
-    // console.log(userInfo.success);
-    return userInfo;
+    }
 };
 
 export const recurse = {

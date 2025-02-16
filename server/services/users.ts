@@ -42,11 +42,6 @@ const userPostResponseSchema = z.object({
 
 interface userPostResponse extends z.infer<typeof userPostResponseSchema>{};
 
-// const getUser = async (user : string) => {
-//     const savedUser = await GithubUserRepository.findUserByUsername(user);
-//     return savedUser;
-// };
-
 const getUser = async (id: string, recurseToken: string | undefined, githubToken: string | undefined) => {
     const savedUser = await RCUserRepository.findUserByRCId(id);
     if (!savedUser) {
