@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@400..700&display=swap');
+
 :root {
   --primary-color-400: hsl(324, 96%, 73%);
 
@@ -5,7 +7,7 @@
   --neutral-color-1100: hsl(0, 0%, 0%);
 
   --ff-primary: system-ui, sans-serif;
-  --ff-heading: 'Cabinet Grotesk Variable', system-ui, serif;
+  --ff-heading: 'Domine', system-ui, serif;
 
   --fs-100: 0.75rem;
   --fs-200: 0.875rem;
@@ -26,6 +28,7 @@
   --gap-600: 2rem;
   --gap-700: 3rem;
   --gap-800: 4rem;
+  --gap-850: 5rem;
   --gap-900: 6rem;
   --gap-1000: 8rem;
   --gap-1100: 12rem;
@@ -54,11 +57,22 @@ html {
 }
 
 body {
-  min-height: 100svh;
+  min-height: 100vh;
+  min-height: 100dvh;
   font-family: var(--ff-body);
 }
 
 img {
   display: block;
   max-width: 100%;
+}
+
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: [top-start full-page-start] 63px [top-end content-start] auto [content-end bottom-start] 0px [top-end bottom-end];
+  grid-auto-rows: min-content;
+  overflow: hidden;
+  grid-template-columns: [left-start full-page-start] 1fr [left-end content-start] fit-content(700px) [content-end right-start] 1fr [right-end full-page-end];
 }
