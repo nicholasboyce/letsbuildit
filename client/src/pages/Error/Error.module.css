@@ -1,0 +1,11 @@
+figure {
+    margin-block-start: var(--gap-400);
+    display: grid;
+    justify-items: center;
+    grid-column: content;
+    grid-row: 2;
+}
+
+img {
+    object-fit: cover;
+}

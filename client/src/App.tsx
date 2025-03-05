@@ -1,5 +1,5 @@
 import './App.css';
-import { Home, SearchPage, Feed, FullPost, UserRepos } from './pages';
+import { Home, SearchPage, Feed, FullPost, UserRepos, ErrorPage } from './pages';
 import { Route, Routes, Outlet } from 'react-router-dom';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
           <Route path=':id' element={<p>Someone else's page!</p>} />
           <Route path=':id/:post' element={<p>The specific post of someone else!</p>} />
         </Route>
-        <Route path='*' element={<h1>Sorry! You're Lost...</h1>} />
+        <Route path='*' element={<ErrorPage />} />
       </Route>
     </Routes>
     </>
