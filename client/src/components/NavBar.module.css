@@ -1,17 +1,24 @@
 .navbar {
-    display: flex;
+    grid-column: full-page;
+    grid-row: top;
+    padding-inline: var(--gap-500);
+    font-family: var(--ff-heading);
+    font-size: var(--fs-700);
     justify-content: space-between;
     align-items: center;
+    background-color: hsl(32, 100%, 40%);
+    color: var(--neutral-color-100);
+    align-content: center;
 }
 
 .logo {
     font-family: var(--ff-heading);
-    font-weight: bold;
+    /* font-weight: bold; */
     text-decoration: none;
     font-size: var(--fs-600);
 }
 
 .logo:visited,
 .logo:link {
-    color: var(--neutral-color-1100);
+    color: var(--neutral-color-100);
 }

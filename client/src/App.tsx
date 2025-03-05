@@ -1,4 +1,5 @@
 import './App.css';
+import { NavBar } from './components';
 import { Home, SearchPage, Feed, FullPost, UserRepos, ErrorPage } from './pages';
 import { Route, Routes, Outlet } from 'react-router-dom';
 
@@ -8,7 +9,7 @@ function App() {
     <>
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route path='/*' element={<><h1>Octopod</h1><Outlet /></>}>
+      <Route path='/*' element={<NavBar />}>
         <Route path='posts'>
           <Route index element={<Feed/>} />
           <Route path='me' element={<p>My page!</p>}/>
@@ -23,8 +24,3 @@ function App() {
 }
 
 export default App;
-
-      {/* <Route path='/search' element={<SearchPage />} />
-      <Route path='/feed' element={<Feed />} />
-      <Route path='/posts/:id' element={<FullPost />} />
-      <Route path='/users/:name/repos' element={<UserRepos />} /> */}
